@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  frontend:
+    env_file: .env
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: frontend
+    volumes:
+      - .:/app
+      # One-way volume to use node_modules from inside image
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    command: yarn start
+    environment: 
+      PORT: ${PORT}
+      NODE_ENV: ${NODE_ENV}
+      REACT_APP_API_HOST: ${REACT_APP_API_HOST}
+      REACT_APP_API_PORT: ${REACT_APP_API_PORT}
+      CHOKIDAR_USEPOLLING: "true"
