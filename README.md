@@ -7,7 +7,7 @@
 
 ## Getting Started
 
-1. Build instances (First time)
+1 . Build instances (First time)
 
     docker-compose build
 
