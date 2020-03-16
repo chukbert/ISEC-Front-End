@@ -27,3 +27,5 @@ function AddTopic(props) {
         </div>
     )
 }
+
+export default AddTopic;

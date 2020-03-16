@@ -1,8 +1,8 @@
 import React from 'react';
 import { Modal, Form, Button } from 'react-bootstrap'
-import './AddTopic.css';
+import './EditTopic.css';
 
-function AddTopic(props) {
+function EditTopic(props) {
     return (
         <div className="add-topic">
             <Modal centered>
@@ -27,3 +27,5 @@ function AddTopic(props) {
         </div>
     )
 }
+
+export default EditTopic;
