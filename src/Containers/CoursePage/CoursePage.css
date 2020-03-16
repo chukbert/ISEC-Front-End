@@ -1,7 +1,26 @@
-.course-page h1 {
-    margin-bottom: 0;
+.course-title {
+    margin: 5em 0 0 10em;
 }
 
 .course-page h3 {
     margin-top: 0.5em;
+}
+
+.course-page-desc-teacher-list {
+    display: flex;
+    width: fit-content;
+    margin: auto;
+}
+
+.topic-list {
+    margin-right: 5em;
+}
+
+.desc-teacher {
+    display: block;
+    margin-left: 5em;
+}
+
+.desc-teacher .description {
+    margin-bottom: 2em;
 }
