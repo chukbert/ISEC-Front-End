@@ -1,0 +1,19 @@
+.topic-link {
+    margin: 2em;
+    background-color: lightblue;
+    padding: 2em;
+    width: 50em;
+}
+
+.topic-link span {
+    margin-right: 1.5em;
+}
+
+.topic-link > a {
+    text-decoration: none;
+    color: black;
+}
+
+.topic-link > a:hover {
+    color: blue;
+}
