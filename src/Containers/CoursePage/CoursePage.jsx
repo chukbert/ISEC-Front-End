@@ -21,12 +21,20 @@ class CoursePage extends React.Component {
     render() {
         return (
             <div className="course-page">
-                <h1>{this.state.name}</h1>
-                <h3>{this.state.code}</h3>
-                <Description data={this.state.description} />
-                <TeacherList />
-                <TopicLink link="#" topicName="Basic OOP Concept" />
-                <TopicLink link="#" topicName="Inheritance" />
+                <div className="course-title">
+                    <h1>{this.state.name}</h1>
+                    <h3>{this.state.code}</h3>
+                </div>
+                <div className="course-page-desc-teacher-list">
+                    <div className="topic-list">
+                        <TopicLink link="#" topicName="Basic OOP Concept" />
+                        <TopicLink link="#" topicName="Inheritance" />
+                    </div>
+                    <div className="desc-teacher">
+                        <Description data={this.state.description} />
+                        <TeacherList />
+                    </div>
+                </div>
             </div>
         )
     }
