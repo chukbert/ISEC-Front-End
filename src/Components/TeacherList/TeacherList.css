@@ -1,8 +1,8 @@
-.description table {
+.teacher-list table {
     width: 15em;
 }
 
-.description th {
+.teacher-list th {
     height: 1.5em;
     text-align: left;
     padding: 0.5em;
@@ -10,7 +10,8 @@
     margin: 0;
 }
 
-.description td {
+.teacher-list td {
     padding: 0.5em;
     border: 1px solid black;
 }
+
