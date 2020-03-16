@@ -8,20 +8,20 @@ function AddTopic(props) {
             <Modal centered>
                 <Modal.Header>
                     <Modal.Title>
-                        Add Topic
+                        Edit Topic
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group controlId="form-add-topic">
                             <Form.Label>Topic Title</Form.Label>
-                            <Form.Control type="text" placeholder="Enter topic title" />
+                            <Form.Control type="text" />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button>Cancel</Button>
-                    <Button btnStyle="primary">Add</Button>
+                    <Button btnStyle="primary">Save</Button>
                 </Modal.Footer>
             </Modal>
         </div>
