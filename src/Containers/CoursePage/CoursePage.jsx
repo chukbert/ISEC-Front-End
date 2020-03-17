@@ -7,6 +7,7 @@ import TopicLink from '../../Components/TopicLink/TopicLink';
 import './CoursePage.css';
 import AddTopic from '../../Components/AddTopic/AddTopic';
 
+
 class CoursePage extends React.Component {
     constructor(props) {
         super()
@@ -21,6 +22,7 @@ class CoursePage extends React.Component {
             isAddModal: false
         }
         this.clearArray = this.clearArray.bind(this);
+        this.showAddModal = this.showAddModal.bind(this);
     }
 
     showAddModal() {
@@ -41,12 +43,14 @@ class CoursePage extends React.Component {
 
         const api = process.env.REACT_APP_API_HOST + '/topics'
         axios.get(api).then(res => {
-            res.data.forEach(element => {
-                this.setState(
-                    this.state.listOfTopicId.push(element._id),
-                    this.state.listOfTopicName.push(element.name)
-                ) 
-            });
+            for (var i = 0; i < res.data.data.length; i++) {
+                this.state.listOfTopicId.push(res.data.data[i]._id)
+                this.state.listOfTopicName.push(res.data.data[i].name)
+                this.setState({
+                    listOfTopicId: this.state.listOfTopicId,
+                    listOfTopicName: this.state.listOfTopicName
+                })
+            }
         })
     }
 
@@ -60,21 +64,21 @@ class CoursePage extends React.Component {
                 <div className="course-page-desc-teacher-list">
                     <div className="topic-list">
                         {
-                            this.state.listOfTopicName.forEach(element => {
-                                return <TopicLink link="#" topicName={element} permission={1}/> 
-                            })
+                            Array.from(this.state.listOfTopicName).map(item => (
+                                <TopicLink link="#" topicName={item} permission={1}/>
+                            ))
                         }
                     </div>
                     <div className="desc-teacher">
                         <Description data={this.state.description} />
                         <TeacherList />
                     </div>
-                    <button onClick={this.showAddModal}>Add Topic</button>
+                </div>
+                <button onClick={this.showAddModal}>Add Topic</button>
                     {
                         this.state.isAddModal && 
-                        <AddTopic />
+                        <AddTopic show={this.state.isAddModal}/>
                     }
-                </div>
             </div>
         )
     }
