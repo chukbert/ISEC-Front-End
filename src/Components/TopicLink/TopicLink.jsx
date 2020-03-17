@@ -7,7 +7,7 @@ const TopicLink = (props) => {
         <div className="topic-link">
             <span>&#9654;</span><a href={props.link}>{props.topicName}</a>
             {
-                (props.permission == 1) &&
+                (props.permission === 1) &&
                 <EditTopic />
             }
         </div>

@@ -39,7 +39,7 @@ class CoursePage extends React.Component {
     componentDidMount() {
         this.clearArray();
 
-        const api = 'http://' + process.env.REACT_APP_API_HOST + '/topics'
+        const api = process.env.REACT_APP_API_HOST + '/topics'
         axios.get(api).then(res => {
             res.data.forEach(element => {
                 this.setState(

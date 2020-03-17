@@ -3,6 +3,7 @@ import './TeacherList.css';
 import TeacherInCoursePage from './TeacherInCoursePage';
 
 function TeacherList() {
+    // eslint-disable-next-line no-unused-vars
     const [teacherList, setTeacherList] = useState(['Louis Cahyadi', 'Kevin Nathaniel Wijaya'])
 
     return (
