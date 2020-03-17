@@ -69,13 +69,7 @@ class CoursePage extends React.Component {
                     <h1>{this.state.name}</h1>
                     <h3>{this.state.code}</h3>
                 </div>
-                <div className="add-topic-button">
-                    <Button onClick={this.showAddModal}>Add Topic</Button>
-                    {
-                        this.state.isAddModal &&
-                        <AddTopic show={this.state.isAddModal} onHide={this.hideAddModal}/>
-                    }
-                </div>
+                
                 <div className="course-page-desc-teacher-list">
                     <div className="topic-list">
                         {
@@ -88,6 +82,14 @@ class CoursePage extends React.Component {
                         <Description data={this.state.description} />
                         <TeacherList />
                     </div>
+                </div>
+
+                <div className="add-topic-button">
+                    <Button onClick={this.showAddModal}>Add Topic</Button>
+                    {
+                        this.state.isAddModal &&
+                        <AddTopic show={this.state.isAddModal} onHide={this.hideAddModal}/>
+                    }
                 </div>
             </div>
         )
