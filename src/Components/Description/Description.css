@@ -1,5 +1,6 @@
 .description table {
     width: 15em;
+    border-collapse: separate !important;
 }
 
 .description th {
@@ -7,10 +8,13 @@
     text-align: left;
     padding: 0.5em;
     background-color: lightblue;
+    border: 1px solid lightblue;
+    border-radius: 12px 12px 0 0;
     margin: 0;
 }
 
 .description td {
     padding: 0.5em;
-    border: 1px solid black;
+    border: 1px solid lightgray;
+    border-radius: 0 0 12px 12px;
 }

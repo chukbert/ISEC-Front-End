@@ -3,10 +3,9 @@ import { Modal, Form, Button } from 'react-bootstrap'
 import './AddTopic.css';
 
 function AddTopic(props) {
-
     
     return (
-        <div className="add-topic">
+        <div className="add-topic" onClick={e => e.stopPropagation()}>
             <Modal {...props} centered>
                 <Modal.Header>
                     <Modal.Title>
@@ -22,8 +21,8 @@ function AddTopic(props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={props.onHide}>Cancel</Button>
-                    <Button btnStyle="primary">Add</Button>
+                    <Button onClick={props.onHide} btnStyle="primary">Cancel</Button>
+                    <Button onClick={props.onHide} btnStyle="primary">Add</Button>
                 </Modal.Footer>
             </Modal>
         </div>

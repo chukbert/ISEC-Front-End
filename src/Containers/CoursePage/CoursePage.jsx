@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import Description from '../../Components/Description/Description';
 import TeacherList from '../../Components/TeacherList/TeacherList';
@@ -23,11 +24,18 @@ class CoursePage extends React.Component {
         }
         this.clearArray = this.clearArray.bind(this);
         this.showAddModal = this.showAddModal.bind(this);
+        this.hideAddModal = this.hideAddModal.bind(this);
     }
 
     showAddModal() {
         this.setState({
             isAddModal: true
+        })
+    }
+
+    hideAddModal() {
+        this.setState({
+            isAddModal: false
         })
     }
 
@@ -61,6 +69,13 @@ class CoursePage extends React.Component {
                     <h1>{this.state.name}</h1>
                     <h3>{this.state.code}</h3>
                 </div>
+                <div className="add-topic-button">
+                    <Button onClick={this.showAddModal}>Add Topic</Button>
+                    {
+                        this.state.isAddModal &&
+                        <AddTopic show={this.state.isAddModal} onHide={this.hideAddModal}/>
+                    }
+                </div>
                 <div className="course-page-desc-teacher-list">
                     <div className="topic-list">
                         {
@@ -74,11 +89,6 @@ class CoursePage extends React.Component {
                         <TeacherList />
                     </div>
                 </div>
-                <button onClick={this.showAddModal}>Add Topic</button>
-                    {
-                        this.state.isAddModal && 
-                        <AddTopic show={this.state.isAddModal}/>
-                    }
             </div>
         )
     }
