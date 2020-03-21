@@ -3,7 +3,12 @@
 }
 
 .add-topic-button {
-    margin-left: 54em;
+    margin-top: 2em;
+}
+
+.add-topic-button button {
+    margin: auto;
+    display:table;
 }
 
 .course-page h3 {

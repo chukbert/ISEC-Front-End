@@ -20,3 +20,7 @@
 .topic-link > a:hover {
     color: blue;
 }
+
+.topic-link button {
+    float: right;
+}
