@@ -1,33 +1,33 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Modal, Form, Button } from 'react-bootstrap'
-import './AddCourse.css';
+import './EditCourse.css';
 
-function AddCourse(props) {
+function EditCourse(props) {
     const [name, setName] = useState(''); 
 
     const handleChange = (e) => {
         setName(e.target.value);
     }
 
-    const createNewCourse = () => {
-        // const api = process.env.REACT_APP_API_HOST + '/courses/new'
+    const editCourse = () => {
+        // const api = process.env.REACT_APP_API_HOST + '/courses/edit'
         // axios.post(api, {"name": name}).then(function() {
         //     window.location.reload();
         // })
     }
     
     return (
-        <div className="add-course" onClick={e => e.stopPropagation()}>
+        <div className="edit-course" onClick={e => e.stopPropagation()}>
             <Modal {...props} centered>
                 <Modal.Header>
                     <Modal.Title>
-                        Add Course
+                        Edit Course
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group controlId="form-add-course">
+                        <Form.Group controlId="form-edit-course">
                             <Form.Label>Name</Form.Label>
                             <Form.Control type="name" placeholder="Enter course name" onChange={handleChange}/>
                             <Form.Label>Code</Form.Label>
@@ -39,11 +39,11 @@ function AddCourse(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide} variant="secondary">Cancel</Button>
-                    <Button onClick={createNewCourse} variant="primary">Add</Button>
+                    <Button onClick={editCourse} variant="primary">Add</Button>
                 </Modal.Footer>
             </Modal>
         </div>
     )
 }
 
-export default AddCourse;
+export default EditCourse;
