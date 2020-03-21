@@ -28,14 +28,14 @@ function AddTopic(props) {
                 <Modal.Body>
                     <Form>
                         <Form.Group controlId="form-add-topic">
-                            <Form.Label>Topic Title</Form.Label>
+                            <Form.Label>Title</Form.Label>
                             <Form.Control type="name" placeholder="Enter topic title" onChange={handleChange}/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={props.onHide} btnStyle="primary">Cancel</Button>
-                    <Button onClick={createNewTopic} btnStyle="primary">Add</Button>
+                    <Button onClick={props.onHide} variant="secondary">Cancel</Button>
+                    <Button onClick={createNewTopic} variant="primary">Add</Button>
                 </Modal.Footer>
             </Modal>
         </div>

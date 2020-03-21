@@ -99,7 +99,7 @@ class CoursePage extends React.Component {
                 </div>
 
                 <div className="add-topic-button">
-                    <Button onClick={this.showAddModal}>Add Topic</Button>
+                    <Button variant="primary" onClick={this.showAddModal}>Add Topic</Button>
                     {
                         this.state.isAddModal &&
                         <AddTopic show={this.state.isAddModal} onHide={this.hideAddModal}/>
