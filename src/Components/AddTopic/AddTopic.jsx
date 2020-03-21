@@ -8,7 +8,6 @@ function AddTopic(props) {
 
     const handleChange = (e) => {
         setName(e.target.value);
-        console.log(name)
     }
 
     const createNewTopic = () => {

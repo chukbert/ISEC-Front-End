@@ -18,8 +18,9 @@ class CoursePage extends React.Component {
             name: 'Object Oriented Programming',
             code: 'IF2110',
             description: 'Deskripsi',
-            listOfTopicId: [],
-            listOfTopicName: [],
+            // listOfTopicId: [],
+            // listOfTopicName: [],
+            listOfTopic: [],
             isAddModal: false
         }
         this.clearArray = this.clearArray.bind(this);
@@ -52,11 +53,19 @@ class CoursePage extends React.Component {
         const api = process.env.REACT_APP_API_HOST + '/topics'
         axios.get(api).then(res => {
             for (var i = 0; i < res.data.data.length; i++) {
-                this.state.listOfTopicId.push(res.data.data[i]._id)
-                this.state.listOfTopicName.push(res.data.data[i].name)
+                // this.state.listOfTopicId.push(res.data.data[i]._id)
+                // this.state.listOfTopicName.push(res.data.data[i].name)
+
+                var topicId = res.data.data[i]._id;
+                var topicName = res.data.data[i].name;
+
+                this.state.listOfTopic.push({"id": topicId, "name": topicName});
+
+                this.state.listOfTopic.push()
                 this.setState({
-                    listOfTopicId: this.state.listOfTopicId,
-                    listOfTopicName: this.state.listOfTopicName
+                    listOfTopic: this.state.listOfTopic,
+                    // listOfTopicId: this.state.listOfTopicId,
+                    // listOfTopicName: this.state.listOfTopicName
                 })
             }
         })
@@ -72,9 +81,14 @@ class CoursePage extends React.Component {
                 
                 <div className="course-page-desc-teacher-list">
                     <div className="topic-list">
-                        {
+                        {/* {
                             Array.from(this.state.listOfTopicName).map(item => (
                                 <TopicLink link="#" topicName={item} permission={1}/>
+                            ))
+                        } */}
+                        {
+                            Array.from(this.state.listOfTopic).map(item => (
+                                <TopicLink link="#" topicName={item.name} topicId={item.id} permission={1}/>
                             ))
                         }
                     </div>
