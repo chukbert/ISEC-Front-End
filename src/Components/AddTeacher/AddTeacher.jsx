@@ -28,7 +28,7 @@ function AddTeacher(props) {
                 <Modal.Body>
                     <Form>
                         <Form.Group controlId="form-add-course">
-                            <Form.Label>Name</Form.Label>
+                            <Form.Label>Username</Form.Label>
                             <Form.Control type="name" placeholder="Enter username" onChange={handleChange}/>
                         </Form.Group>
                     </Form>
