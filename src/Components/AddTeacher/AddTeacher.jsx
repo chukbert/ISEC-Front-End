@@ -42,4 +42,4 @@ function AddTeacher(props) {
     )
 }
 
-export default AddCourse;
+export default AddTeacher;
