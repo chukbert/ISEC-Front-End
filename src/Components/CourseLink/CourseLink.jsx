@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Axios from 'axios';
+import './CourseLink.css'
 
 const CourseLink = (props) => {
     const courseId = props.id;
@@ -19,12 +20,12 @@ const CourseLink = (props) => {
 
     return (
         <div className="course-link" onClick={showDescription}>
-            <span>&#9654;{props.name}</span>
+            <span>&#9654;</span>{props.name}
             {
                 isShowDescription &&
                 <div>
-                    <span>{description}</span>
-                    <span>{prerequisite}</span>
+                    <p>{description}</p>
+                    <p>{prerequisite}</p>
                     <Button>Enroll</Button>
                 </div>
             }

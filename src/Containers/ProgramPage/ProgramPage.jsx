@@ -3,6 +3,7 @@ import Axios from 'axios';
 import Description from '../../Components/Description/Description';
 import TeacherList from '../../Components/TeacherList/TeacherList';
 import CourseLink from '../../Components/CourseLink/CourseLink';
+import './ProgramPage.css';
 
 class ProgramPage extends React.Component {
     constructor(props) {
@@ -10,7 +11,7 @@ class ProgramPage extends React.Component {
         this.state = {
             permission: 0,
             id: props.programId,
-            name: '',
+            name: props.name,
             listOfCourse: [],
             listOfIsShowCourse: [],
         }

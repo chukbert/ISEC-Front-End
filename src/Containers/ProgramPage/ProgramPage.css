@@ -1,0 +1,26 @@
+.program-title {
+    margin: 5em 0 0 10em;
+}
+
+.program-title h1 {
+    margin-left: 5em;
+}
+
+.program-page-desc-teacher-list {
+    display: flex;
+    width: fit-content;
+    margin: auto;
+}
+
+.desc-teacher {
+    display: block;
+    margin-left: 5em;
+}
+
+.desc-teacher .description {
+    margin-bottom: 2em;
+}
+
+.course-list {
+    margin-right: 5em;
+}
