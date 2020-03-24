@@ -91,6 +91,7 @@ class CoursePage extends React.Component {
     render() {
         return (
             <div className="course-page">
+                <NavbarApp/>
                 <div className="course-title">
                     <h1>{this.state.name}</h1>
                     <h3>{this.state.code}</h3>

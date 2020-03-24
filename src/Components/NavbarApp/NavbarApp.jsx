@@ -1,26 +1,19 @@
 import React, { useState } from 'react';
-import { Navbar } from 'react-bootstrap'
-import './Navbar.css';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import './NavbarApp.css';
 
-function Navbar() {
+function NavbarApp() {
     // eslint-disable-next-line no-unused-vars
-    const [teacherList, setTeacherList] = useState(['Louis Cahyadi', 'Kevin Nathaniel Wijaya'])
-
     return (
         <div className="navbar">
-            <Navbar>
-                <Navbar.Brand href="#home">ISEC</Navbar.Brand>
+            <Navbar fixed="top" expand="lg">
+                <div className="app-name">
+                    <Navbar.Brand href="#">ISEC</Navbar.Brand>
+                </div>
                 <Nav className="mr-auto">
                     <Nav.Link href="#">Courses</Nav.Link>
                     <Nav.Link href="#">Programs</Nav.Link>
                 </Nav>
-                <img
-                    alt=""
-                    src=""
-                    width="30"
-                    height="30"
-                    className="d-inline-block align-top"
-                />{' '}
                 <NavDropdown title="User" id="nav-dropdown">
                     <NavDropdown.Item href="#">Logout</NavDropdown.Item>
                 </NavDropdown>
@@ -29,4 +22,4 @@ function Navbar() {
     );
 }
 
-export default Navbar;
+export default NavbarApp;

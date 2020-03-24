@@ -1,5 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
+import NavbarApp from '../../Components/NavbarApp/NavbarApp';
 import Description from '../../Components/Description/Description';
 import TeacherList from '../../Components/TeacherList/TeacherList';
 import CourseLink from '../../Components/CourseLink/CourseLink';
@@ -40,6 +41,7 @@ class ProgramPage extends React.Component {
     render() {
         return (
             <div className="program-page">
+                <NavbarApp/>
                 <div className="program-title">
                     <h1>{this.state.name}</h1>
                 </div>
