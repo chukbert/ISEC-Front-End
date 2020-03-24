@@ -21,9 +21,7 @@ class ProgramPage extends React.Component {
     render() {
         return (
             <div className="program-page">
-                <div className="navbar">
-                    <NavbarApp/>
-                </div>
+                <NavbarApp/>
                 <div className="program-title">
                     <h1>{this.state.name}</h1>
                 </div>
