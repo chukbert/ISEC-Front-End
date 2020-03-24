@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
+import NavbarApp from '../../Components/NavbarApp/NavbarApp';
 import Description from '../../Components/Description/Description';
 import TopicLink from '../../Components/TopicLink/TopicLink';
 import AddTopic from '../../Components/AddTopic/AddTopic';

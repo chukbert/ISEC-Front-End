@@ -1,5 +1,5 @@
 import React from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import NavbarApp from '../../Components/NavbarApp/NavbarApp';
 import Description from '../../Components/Description/Description';
 import TeacherList from '../../Components/TeacherList/TeacherList';
@@ -22,6 +22,7 @@ class ProgramPage extends React.Component {
             isAddCourse: false,
         }
 
+        this.clearArray = this.clearArray.bind(this);
         this.showAddCourse = this.showAddCourse.bind(this);
         this.hideAddCourse = this.hideAddCourse.bind(this);
     }
@@ -38,6 +39,39 @@ class ProgramPage extends React.Component {
         })
     }
 
+    clearArray() {
+        this.setState({ 
+            listOfCourseId: [],
+            listOfCourseName: []
+        });
+    }
+
+    componentDidMount() {
+        this.clearArray();
+
+        const api = process.env.REACT_APP_API_HOST + '/courses'
+        axios.get(api).then(res => {
+            for (var i = 0; i < res.data.data.length; i++) {
+                // this.state.listOfCourseId.push(res.data.data[i]._id)
+                // this.state.listOfCourseName.push(res.data.data[i].name)
+
+                var courseId = res.data.data[i]._id;
+                var courseName = res.data.data[i].name;
+                var courseCode = res.data.data[i].code;
+                var courseDescription = res.data.data[i].description;
+
+                this.state.listOfCourse.push({"id": courseId, "name": courseName, "code": courseCode, "description": courseDescription});
+
+                this.state.listOfCourse.push()
+                this.setState({
+                    listOfCourse: this.state.listOfCourse,
+                    // listOfCourseId: this.state.listOfCourseId,
+                    // listOfCourseName: this.state.listOfCourseName
+                })
+            }
+        })
+    }
+
     render() {
         return (
             <div className="program-page">
@@ -49,6 +83,11 @@ class ProgramPage extends React.Component {
                 <div className="program-page-desc-teacher-list">
                     <div className="course-list">
                         <CourseLink name="Dasar Pemrograman" id = {1} />
+                        {
+                            Array.from(this.state.listOfCourse).map(item => (
+                                <CourseLink name={item.name} id={item.id} permission={1}/>
+                            ))
+                        }
                     </div>
                     <div className="desc-teacher">
                         <Description data={this.state.programDesciption}/>
