@@ -24,3 +24,8 @@
 .course-list {
     margin-right: 5em;
 }
+
+.add-course-button button {
+    margin: auto;
+    display: table;
+}

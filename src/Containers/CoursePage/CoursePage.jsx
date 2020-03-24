@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+
 import Description from '../../Components/Description/Description';
-import TeacherList from '../../Components/TeacherList/TeacherList';
 import TopicLink from '../../Components/TopicLink/TopicLink';
+import AddTopic from '../../Components/AddTopic/AddTopic';
+import EditCourse from '../../Components/EditCourse/EditCourse';
 
 import './CoursePage.css';
-import AddTopic from '../../Components/AddTopic/AddTopic';
 
 
 class CoursePage extends React.Component {
@@ -21,11 +22,15 @@ class CoursePage extends React.Component {
             // listOfTopicId: [],
             // listOfTopicName: [],
             listOfTopic: [],
-            isAddModal: false
+            isAddModal: false,
+            isEditCourse: false,
         }
         this.clearArray = this.clearArray.bind(this);
         this.showAddModal = this.showAddModal.bind(this);
         this.hideAddModal = this.hideAddModal.bind(this);
+
+        this.showEditCourse = this.showEditCourse.bind(this);
+        this.hideEditCourse = this.hideEditCourse.bind(this);
     }
 
     showAddModal() {
@@ -37,6 +42,18 @@ class CoursePage extends React.Component {
     hideAddModal() {
         this.setState({
             isAddModal: false
+        })
+    }
+
+    showEditCourse() {
+        this.setState({
+            isEditCourse: true
+        })
+    }
+
+    hideEditCourse() {
+        this.setState({
+            isEditCourse: false
         })
     }
 
@@ -78,6 +95,14 @@ class CoursePage extends React.Component {
                     <h1>{this.state.name}</h1>
                     <h3>{this.state.code}</h3>
                 </div>
+
+                <div className="edit-course">
+                    <Button variant="primary" onClick={this.showEditCourse}>Edit Course</Button>
+                    {
+                        this.state.isEditCourse &&
+                        <EditCourse show={this.state.isEditCourse} onHide={this.hideEditCourse}/>
+                    }
+                </div>
                 
                 <div className="course-page-desc-teacher-list">
                     <div className="topic-list">
@@ -94,7 +119,6 @@ class CoursePage extends React.Component {
                     </div>
                     <div className="desc-teacher">
                         <Description data={this.state.description} />
-                        <TeacherList />
                     </div>
                 </div>
 

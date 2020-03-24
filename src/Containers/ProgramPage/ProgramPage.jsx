@@ -3,18 +3,38 @@ import Axios from 'axios';
 import Description from '../../Components/Description/Description';
 import TeacherList from '../../Components/TeacherList/TeacherList';
 import CourseLink from '../../Components/CourseLink/CourseLink';
+import AddCourse from '../../Components/AddCourse/AddCourse';
+
 import './ProgramPage.css';
+import { Button } from 'react-bootstrap';
 
 class ProgramPage extends React.Component {
     constructor(props) {
         super()
         this.state = {
-            permission: 0,
+            permission: 2,
             id: props.programId,
             name: props.name,
             listOfCourse: [],
             listOfIsShowCourse: [],
+
+            isAddCourse: false,
         }
+
+        this.showAddCourse = this.showAddCourse.bind(this);
+        this.hideAddCourse = this.hideAddCourse.bind(this);
+    }
+
+    showAddCourse() {
+        this.setState({
+            isAddCourse: true
+        })
+    }
+
+    hideAddCourse() {
+        this.setState({
+            isAddCourse: false
+        })
     }
 
     render() {
@@ -30,10 +50,19 @@ class ProgramPage extends React.Component {
                     </div>
                     <div className="desc-teacher">
                         <Description data={this.state.programDesciption}/>
-                        <TeacherList />
+                        <TeacherList permission={this.state.permission}/>
                     </div>
                 </div>
 
+                {(this.state.permission == 1 || this.state.permission == 2) &&
+                <div className="add-course-button">
+                    <Button variant="primary" onClick={this.showAddCourse}>Add Course</Button>
+                    {
+                        this.state.isAddCourse &&
+                        <AddCourse show={this.state.isAddCourse} onHide={this.hideAddCourse}/>
+                    }
+                </div>
+                }
             </div>
         )
     }
