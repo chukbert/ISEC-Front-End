@@ -7,7 +7,6 @@ const CourseLink = (props) => {
     const courseId = props.id;
     const [isShowDescription, setIsShowDescription] = useState(false)
     const [description, setDescription] = useState('description')
-    const [prerequisite, setPrerequisite] = useState('prerequisite')
 
     const showDescription = () => {
         setIsShowDescription(!isShowDescription)
@@ -25,7 +24,14 @@ const CourseLink = (props) => {
                 isShowDescription &&
                 <div>
                     <p>{description}</p>
-                    <p>{prerequisite}</p>
+                    {
+                        props.prerequisite.length > 0 &&
+                        <p>{props.prerequisite}</p>
+                    }
+                    {
+                        props.prerequisite.length === 0 &&
+                        <p>No Prerequisite</p>
+                    }
                     <Button>Enroll</Button>
                 </div>
             }

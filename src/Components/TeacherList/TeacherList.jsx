@@ -44,7 +44,7 @@ function TeacherList(props) {
                 </tbody>
             </table>
 
-            { props.permission == 2 &&
+            { props.permission === 2 &&
                 <div className="add-teacher">
                     <Button onClick={showAddTeacher}>Add Teacher</Button>
                     {

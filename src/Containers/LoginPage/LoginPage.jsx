@@ -3,7 +3,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Form, Button } from 'react-bootstrap';
 import './LoginPage.css';
-import CoursePage from '../CoursePage/CoursePage';
+
+import ProgramPage from '../ProgramPage/ProgramPage';
 
 class LoginPage extends React.Component {
     constructor() {
@@ -110,7 +111,7 @@ class LoginPage extends React.Component {
         if (Cookies.get('token')){
             if (this.state.isTokenValid) {
                 return (
-                    <CoursePage permission={this.state.permission} />
+                    <ProgramPage id="5e7a06499e06c4001dcb3b3a" permission={this.state.permission}/>
                 )
             } else {
                 this.checkToken();
