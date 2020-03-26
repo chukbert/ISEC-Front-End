@@ -4,7 +4,8 @@ import Cookies from 'js-cookie';
 import { Form, Button } from 'react-bootstrap';
 import './LoginPage.css';
 
-import ProgramPage from '../ProgramPage/ProgramPage';
+// import ProgramPage from '../ProgramPage/ProgramPage';
+import Home from '../Home/Home';
 
 class LoginPage extends React.Component {
     constructor() {
@@ -111,7 +112,7 @@ class LoginPage extends React.Component {
         if (Cookies.get('token')){
             if (this.state.isTokenValid) {
                 return (
-                    <ProgramPage id="5e7cd0babe742b001dbfaf83" permission={this.state.permission}/>
+                    <Home permission={this.state.permission} />
                 )
             } else {
                 this.checkToken();

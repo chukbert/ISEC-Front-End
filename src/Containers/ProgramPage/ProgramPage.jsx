@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import NavbarApp from '../../Components/NavbarApp/NavbarApp';
 import Description from '../../Components/Description/Description';
 import TeacherList from '../../Components/TeacherList/TeacherList';
 import CourseLink from '../../Components/CourseLink/CourseLink';
@@ -14,8 +13,8 @@ class ProgramPage extends React.Component {
     constructor(props) {
         super()
         this.state = {
-            permission: props.permission,
-            id: props.id,
+            permission: 0,
+            id: '',
             name: '',
             description: '',
             listOfCourse: [],
@@ -50,14 +49,16 @@ class ProgramPage extends React.Component {
 
     componentDidMount() {
         this.clearArray();
+        const program_id = this.props.match.params.program_id;
 
-        const api = process.env.REACT_APP_API_HOST + '/enrollprograms/' + this.state.id;
+        const api = process.env.REACT_APP_API_HOST + '/enrollprograms/' + program_id;
         axios.get(api, {
             headers: {
                 "Authorization": `${Cookies.get('token')}`
             }
         }).then(res => {
             this.setState({
+                id: program_id,
                 name: res.data.data.program_id.name,
                 description: res.data.data.program_id.description,
                 listOfTeacher: res.data.data.program_id.list_teacher,
@@ -85,7 +86,6 @@ class ProgramPage extends React.Component {
     render() {
         return (
             <div className="program-page">
-                <NavbarApp/>
                 <div className="program-title">
                     <h1>{this.state.name}</h1>
                 </div>
@@ -95,10 +95,11 @@ class ProgramPage extends React.Component {
                         {
                             Array.from(this.state.listOfCourse).map(item => (
                                 <CourseLink name={item.name} 
-                                            id={item.id} 
+                                            courseId={item.id} 
                                             prerequisite={item.prerequisite}
                                             status={item.status}
                                             permission={this.state.permission}
+                                            programId={this.state.id}
                                 />
                             ))
                         }

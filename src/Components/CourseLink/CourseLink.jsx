@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Axios from 'axios';
+import Cookies from 'js-cookie';
+
 import './CourseLink.css'
 
 const CourseLink = (props) => {
-    const courseId = props.id;
+    const programId = props.programId;
+    const courseId = props.courseId;
     const [isShowDescription, setIsShowDescription] = useState(false)
     const [description, setDescription] = useState('description')
 
@@ -13,8 +16,24 @@ const CourseLink = (props) => {
         const api = process.env.REACT_APP_API_HOST + '/courses/' + courseId;
         Axios.get(api).then(res => {
             setDescription(res.data.data.description);
-            // setPrerequisite(res.data.data.prerequisite)
         })
+    }
+
+    const enrollCourse = () => {
+        const api = process.env.REACT_APP_API_HOST + '/enrollprograms/enroll/' + programId;
+        Axios.patch(api, {
+            "course_id": courseId
+        }, {
+            headers: {
+                "Authorization": `${Cookies.get('token')}`
+            }
+        }).then(() => {
+            window.location.href="/courses/" + programId + "/" + courseId;
+        })        
+    }
+
+    const continueCourse = () => {
+        window.location.href="/courses/" + programId + "/" + courseId;
     }
 
     return (
@@ -38,11 +57,11 @@ const CourseLink = (props) => {
                     }
                     {
                         props.status === 0 &&
-                        <Button>Enroll</Button>
+                        <Button onClick={enrollCourse}>Enroll</Button>
                     }
                     {
                         props.status === 1 &&
-                        <Button>Continue</Button>
+                        <Button onClick={continueCourse}>Continue</Button>
                     }
                     {
                         props.status === 2 &&
