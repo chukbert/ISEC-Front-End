@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import NavbarApp from '../../Components/NavbarApp/NavbarApp';
 import Description from '../../Components/Description/Description';
 import TeacherList from '../../Components/TeacherList/TeacherList';
@@ -13,12 +14,11 @@ class ProgramPage extends React.Component {
     constructor(props) {
         super()
         this.state = {
-            permission: 2,
-            id: props.programId,
-            name: props.name,
+            permission: props.permission,
+            id: props.id,
+            name: '',
+            description: '',
             listOfCourse: [],
-            listOfIsShowCourse: [],
-
             isAddCourse: false,
         }
 
@@ -41,32 +41,37 @@ class ProgramPage extends React.Component {
 
     clearArray() {
         this.setState({ 
-            listOfCourseId: [],
-            listOfCourseName: []
+            listOfCourse: [],
         });
     }
 
     componentDidMount() {
         this.clearArray();
 
-        const api = process.env.REACT_APP_API_HOST + '/courses'
-        axios.get(api).then(res => {
-            for (var i = 0; i < res.data.data.length; i++) {
-                // this.state.listOfCourseId.push(res.data.data[i]._id)
-                // this.state.listOfCourseName.push(res.data.data[i].name)
+        const api = process.env.REACT_APP_API_HOST + '/programs/' + this.state.id;
+        axios.get(api, {
+            headers: {
+                "Authorization": `${Cookies.get('token')}`
+            }
+        }).then(res => {
+            this.setState({
+                name: res.data.data.name,
+                description: res.data.data.description,
+            })
+            for (var i = 0; i < res.data.data.list_course.length; i++) {
+                var courseId = res.data.data.list_course[i].course_id._id;
+                var courseName = res.data.data.list_course[i].course_id.name;
+                var prerequisite = res.data.data.list_course[i].prerequisite;
+                var listOfPrerequisite = []
+                for (var j = 0; j < prerequisite.length; j++) {
+                    listOfPrerequisite.push(prerequisite[j].name)
+                }
 
-                var courseId = res.data.data[i]._id;
-                var courseName = res.data.data[i].name;
-                var courseCode = res.data.data[i].code;
-                var courseDescription = res.data.data[i].description;
-
-                this.state.listOfCourse.push({"id": courseId, "name": courseName, "code": courseCode, "description": courseDescription});
+                this.state.listOfCourse.push({"id": courseId, "name": courseName, "prerequisite": listOfPrerequisite});
 
                 this.state.listOfCourse.push()
                 this.setState({
                     listOfCourse: this.state.listOfCourse,
-                    // listOfCourseId: this.state.listOfCourseId,
-                    // listOfCourseName: this.state.listOfCourseName
                 })
             }
         })
@@ -82,10 +87,13 @@ class ProgramPage extends React.Component {
 
                 <div className="program-page-desc-teacher-list">
                     <div className="course-list">
-                        <CourseLink name="Dasar Pemrograman" id = {1} />
                         {
                             Array.from(this.state.listOfCourse).map(item => (
-                                <CourseLink name={item.name} id={item.id} permission={1}/>
+                                <CourseLink name={item.name} 
+                                            id={item.id} 
+                                            prerequisite={item.prerequisite}
+                                            permission={this.state.permission}
+                                />
                             ))
                         }
                     </div>
@@ -95,7 +103,7 @@ class ProgramPage extends React.Component {
                     </div>
                 </div>
 
-                {(this.state.permission == 1 || this.state.permission == 2) &&
+                {(this.state.permission === 1 || this.state.permission === 2) &&
                 <div className="add-course-button">
                     <Button variant="primary" onClick={this.showAddCourse}>Add Course</Button>
                     {
