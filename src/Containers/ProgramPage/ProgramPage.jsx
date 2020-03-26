@@ -109,7 +109,7 @@ class ProgramPage extends React.Component {
                     </div>
                     <div className="desc-teacher">
                         <Description data={this.state.programDesciption}/>
-                        <TeacherList permission={this.state.permission} teachers={this.state.listOfTeacher}/>
+                        <TeacherList permission={this.state.permission} teachers={this.state.listOfTeacher} id={this.state.id}/>
                     </div>
                 </div>
 

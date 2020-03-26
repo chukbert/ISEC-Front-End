@@ -9,6 +9,7 @@ import ProgramPage from './Containers/ProgramPage/ProgramPage';
 import CoursePage from './Containers/CoursePage/CoursePage';
 
 ReactDOM.render(<LoginPage />, document.getElementById('root'));
+// ReactDOM.render(<ProgramPage id="5e7cd0babe742b001dbfaf83" permission={2}/>, document.getElementById('root'));
 // ReactDOM.render(<CoursePage permission={2} id={1}/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

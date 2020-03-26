@@ -27,5 +27,6 @@
 
 .add-course-button button {
     margin: auto;
+    margin-top: 0.5em;
     display: table;
 }

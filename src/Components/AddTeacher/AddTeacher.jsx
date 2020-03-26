@@ -10,11 +10,11 @@ function AddTeacher(props) {
         setName(e.target.value);
     }
 
-    const addTeacherToCourse = () => {
-        // const api = process.env.REACT_APP_API_HOST + ''
-        // axios.post(api, {"name": name}).then(function() {
-        //     window.location.reload();
-        // })
+    const addTeacherToProgram = () => {
+        const api = process.env.REACT_APP_API_HOST + '/programs/teacher/' + props.id
+        axios.post(api, {"username": name}).then(function() {
+            window.location.reload();
+        })
     }
     
     return (
@@ -35,7 +35,7 @@ function AddTeacher(props) {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide} variant="secondary">Cancel</Button>
-                    <Button onClick={addTeacherToCourse} variant="primary">Add</Button>
+                    <Button onClick={addTeacherToProgram} variant="primary">Add</Button>
                 </Modal.Footer>
             </Modal>
         </div>

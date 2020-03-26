@@ -4,17 +4,33 @@ import { Modal, Form, Button } from 'react-bootstrap'
 import './EditCourse.css';
 
 function EditCourse(props) {
-    const [name, setName] = useState(''); 
+    const [name, setName] = useState('');
+    const [code, setCode] = useState('');
+    const [description, setDescription] = useState('');
 
-    const handleChange = (e) => {
+    const handleChangeName = (e) => {
         setName(e.target.value);
     }
 
+    const handleChangeCode = (e) => {
+        setCode(e.target.value);
+    }
+
+    const handleDescription = (e) => {
+        setDescription(e.target.value);
+    }
+
     const editCourse = () => {
-        // const api = process.env.REACT_APP_API_HOST + '/courses/edit'
-        // axios.post(api, {"name": name}).then(function() {
-        //     window.location.reload();
-        // })
+        const api = process.env.REACT_APP_API_HOST + '/courses/edit/' + props.id;
+        axios.patch(api, {"name": name, "code": code, "description": description},
+        // {
+        //     headers: {
+        //         "Authorization": `${Cookies.get('token')}`
+        //     }
+        // }
+        ).then(function() {
+            window.location.reload();
+        })
     }
     
     return (
@@ -29,17 +45,17 @@ function EditCourse(props) {
                     <Form>
                         <Form.Group controlId="form-edit-course">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="name" placeholder="Enter course name" onChange={handleChange}/>
+                            <Form.Control type="name" placeholder="Enter course name" onChange={handleChangeName}/>
                             <Form.Label>Code</Form.Label>
-                            <Form.Control type="name" placeholder="Enter course code" onChange={handleChange}/>
+                            <Form.Control type="code" placeholder="Enter course code" onChange={handleChangeCode}/>
                             <Form.Label>Description</Form.Label>
-                            <Form.Control type="name" placeholder="Enter course description" onChange={handleChange}/>
+                            <Form.Control type="description" placeholder="Enter course description" onChange={handleDescription}/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={props.onHide} variant="secondary">Cancel</Button>
-                    <Button onClick={editCourse} variant="primary">Add</Button>
+                    <Button onClick={editCourse} variant="primary">Save</Button>
                 </Modal.Footer>
             </Modal>
         </div>

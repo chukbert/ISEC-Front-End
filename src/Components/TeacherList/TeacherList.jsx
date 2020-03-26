@@ -49,7 +49,7 @@ function TeacherList(props) {
                     <Button onClick={showAddTeacher}>Add Teacher</Button>
                     {
                         isAddTeacher &&
-                        <AddTeacher show={isAddTeacher} onHide={hideAddTeacher} />
+                        <AddTeacher show={isAddTeacher} onHide={hideAddTeacher} id={props.id}/>
                     }
                 </div>
             }

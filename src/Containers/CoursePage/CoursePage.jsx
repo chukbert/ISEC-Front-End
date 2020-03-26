@@ -102,7 +102,7 @@ class CoursePage extends React.Component {
                     <Button variant="primary" onClick={this.showEditCourse}>Edit Course</Button>
                     {
                         this.state.isEditCourse &&
-                        <EditCourse show={this.state.isEditCourse} onHide={this.hideEditCourse}/>
+                        <EditCourse show={this.state.isEditCourse} onHide={this.hideEditCourse} id={this.state.id}/>
                     }
                 </div>
                 
