@@ -51,38 +51,33 @@ class ProgramPage extends React.Component {
     componentDidMount() {
         this.clearArray();
 
-        const api = process.env.REACT_APP_API_HOST + '/programs/' + this.state.id;
+        const api = process.env.REACT_APP_API_HOST + '/enrollprograms/' + this.state.id;
         axios.get(api, {
             headers: {
                 "Authorization": `${Cookies.get('token')}`
             }
         }).then(res => {
             this.setState({
-                name: res.data.data.name,
-                description: res.data.data.description,
+                name: res.data.data.program_id.name,
+                description: res.data.data.program_id.description,
+                listOfTeacher: res.data.data.program_id.list_teacher,
             })
-            for (var i = 0; i < res.data.data.list_course.length; i++) {
-                var courseId = res.data.data.list_course[i].course_id._id;
-                var courseName = res.data.data.list_course[i].course_id.name;
-                var prerequisite = res.data.data.list_course[i].prerequisite;
+            for (var i = 0; i < res.data.data.courses.length; i++) {
+                var courseId = res.data.data.courses[i].course_id._id;
+                var courseName = res.data.data.courses[i].course_id.name;
+                var prerequisite = res.data.data.courses[i].prerequisite;
                 var listOfPrerequisite = []
                 for (var j = 0; j < prerequisite.length; j++) {
                     listOfPrerequisite.push(prerequisite[j].name)
                 }
+                var status = res.data.data.courses[i].status_course;
 
-                this.state.listOfCourse.push({"id": courseId, "name": courseName, "prerequisite": listOfPrerequisite});
+                this.state.listOfCourse.push({"id": courseId, "name": courseName, "prerequisite": listOfPrerequisite, "status": status});
 
                 this.state.listOfCourse.push()
                 this.setState({
                     listOfCourse: this.state.listOfCourse,
                 })
-            }
-        })
-
-        const apiProgram = process.env.REACT_APP_API_HOST + '/programs/'
-        axios.get(apiProgram).then(res => {
-            for (var i = 0; i < res.data.data[0].list_teacher.length; i++) {
-                this.state.listOfTeacher.push(res.data.data.list_teacher[i])
             }
         })
     }
@@ -102,6 +97,7 @@ class ProgramPage extends React.Component {
                                 <CourseLink name={item.name} 
                                             id={item.id} 
                                             prerequisite={item.prerequisite}
+                                            status={item.status}
                                             permission={this.state.permission}
                                 />
                             ))
