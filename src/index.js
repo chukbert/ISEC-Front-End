@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import App from './App'
+import LoginPage from './Containers/LoginPage/LoginPage';
 import * as serviceWorker from './serviceWorker';
 import ProgramPage from './Containers/ProgramPage/ProgramPage';
 // import CoursePage from './Containers/CoursePage/CoursePage';
