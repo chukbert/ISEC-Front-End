@@ -13,8 +13,8 @@ const CourseLink = (props) => {
         setIsShowDescription(!isShowDescription)
         const api = process.env.REACT_APP_API_HOST + '/courses/' + courseId;
         Axios.get(api).then(res => {
-            setDescription(res.data.description)
-            // setPrerequisite(res.data.prerequisite)
+            setDescription(res.data.data.description);
+            // setPrerequisite(res.data.data.prerequisite)
         })
     }
 
