@@ -18,6 +18,7 @@ class ProgramPage extends React.Component {
             name: props.name,
             listOfCourse: [],
             listOfIsShowCourse: [],
+            listOfTeacher: [],
 
             isAddCourse: false,
         }
@@ -70,6 +71,13 @@ class ProgramPage extends React.Component {
                 })
             }
         })
+
+        const apiProgram = process.env.REACT_APP_API_HOST + '/programs/'
+        axios.get(apiProgram).then(res => {
+            for (var i = 0; i < res.data.data[0].list_teacher.length; i++) {
+                this.state.listOfTeacher.push(res.data.data.list_teacher[i])
+            }
+        })
     }
 
     render() {
@@ -91,7 +99,7 @@ class ProgramPage extends React.Component {
                     </div>
                     <div className="desc-teacher">
                         <Description data={this.state.programDesciption}/>
-                        <TeacherList permission={this.state.permission}/>
+                        <TeacherList permission={this.state.permission} teachers={this.state.listOfTeacher}/>
                     </div>
                 </div>
 

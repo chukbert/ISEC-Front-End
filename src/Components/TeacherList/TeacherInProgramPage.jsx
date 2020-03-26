@@ -1,7 +1,7 @@
 import React from 'react';
 // import './TeacherList.css';
 
-const TeacherInCoursePage = (props) => {
+const TeacherInProgramPage = (props) => {
     return (
         <div className="teacher-in-course-page">
             <span>{props.name}</span>
@@ -9,4 +9,4 @@ const TeacherInCoursePage = (props) => {
     )
 }
 
-export default TeacherInCoursePage;
+export default TeacherInProgramPage;

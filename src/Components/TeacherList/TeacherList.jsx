@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
-import TeacherInCoursePage from './TeacherInCoursePage';
+import TeacherInProgramPage from './TeacherInProgramPage';
 import AddTeacher from '../AddTeacher/AddTeacher';
 
 import './TeacherList.css';
 
 function TeacherList(props) {
     // eslint-disable-next-line no-unused-vars
-    const [teacherList, setTeacherList] = useState(['Louis Cahyadi', 'Kevin Nathaniel Wijaya'])
+    // const [teacherList, setTeacherList] = useState(props.teachers)
+    const [teacherList, setTeacherList] = useState(props.teachers)
     const [isAddTeacher, setIsAddTeacher] = useState(false)
 
     const showAddTeacher = () => {
@@ -30,9 +31,16 @@ function TeacherList(props) {
                 <tbody>
                     { teacherList.map((teacher) => {
                             return (<tr>
-                                <td><TeacherInCoursePage name={teacher} /></td>
+                                <td><TeacherInProgramPage name={teacher} /></td>
                             </tr>
                     )})}
+                    {
+                        teacherList.length == 0 &&
+                        <tr>
+                            <td><span>No teachers added yet</span></td>
+                        </tr>
+
+                    }
                 </tbody>
             </table>
 
