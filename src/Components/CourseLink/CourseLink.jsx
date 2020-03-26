@@ -23,16 +23,31 @@ const CourseLink = (props) => {
             {
                 isShowDescription &&
                 <div>
-                    <p>{description}</p>
+                    <p> Description : {description}</p>
                     {
                         props.prerequisite.length > 0 &&
-                        <p>{props.prerequisite}</p>
+                        <p>Prerequisite : {props.prerequisite}</p>
                     }
                     {
                         props.prerequisite.length === 0 &&
                         <p>No Prerequisite</p>
                     }
-                    <Button>Enroll</Button>
+                    {
+                        props.status === -1 &&
+                        <p>You cannot enroll to this course. Finish the prerequisite first</p>
+                    }
+                    {
+                        props.status === 0 &&
+                        <Button>Enroll</Button>
+                    }
+                    {
+                        props.status === 1 &&
+                        <Button>Continue</Button>
+                    }
+                    {
+                        props.status === 2 &&
+                        <p>You have finished this course</p>
+                    }
                 </div>
             }
         </div>

@@ -111,7 +111,7 @@ class LoginPage extends React.Component {
         if (Cookies.get('token')){
             if (this.state.isTokenValid) {
                 return (
-                    <ProgramPage id="5e7a06499e06c4001dcb3b3a" permission={this.state.permission}/>
+                    <ProgramPage id="5e7cd0babe742b001dbfaf83" permission={this.state.permission}/>
                 )
             } else {
                 this.checkToken();
