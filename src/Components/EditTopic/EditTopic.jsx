@@ -34,8 +34,8 @@ function EditTopic(props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={props.onHide} btnStyle="primary">Cancel</Button>
-                    <Button onClick={editTopic} btnStyle="primary">Save</Button>
+                    <Button onClick={props.onHide} variant="secondary">Cancel</Button>
+                    <Button onClick={editTopic} variant="primary">Save</Button>
                 </Modal.Footer>
             </Modal>
         </div>

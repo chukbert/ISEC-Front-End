@@ -20,3 +20,8 @@
 .teacher-list tr:last-child td {
     border-radius: 0 0 12px 12px;
 }
+
+.add-teacher button {
+    margin: auto;
+    display: table;
+ }
