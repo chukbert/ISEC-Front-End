@@ -1,10 +1,24 @@
 import React, { useState } from 'react';
-import './TeacherList.css';
-import TeacherInCoursePage from './TeacherInCoursePage';
+import { Button } from 'react-bootstrap';
 
-function TeacherList() {
+import TeacherInProgramPage from './TeacherInProgramPage';
+import AddTeacher from '../AddTeacher/AddTeacher';
+
+import './TeacherList.css';
+
+function TeacherList(props) {
     // eslint-disable-next-line no-unused-vars
-    const [teacherList, setTeacherList] = useState(['Louis Cahyadi', 'Kevin Nathaniel Wijaya'])
+    // const [teacherList, setTeacherList] = useState(props.teachers)
+    const [teacherList, setTeacherList] = useState(props.teachers)
+    const [isAddTeacher, setIsAddTeacher] = useState(false)
+
+    const showAddTeacher = () => {
+        setIsAddTeacher(true)
+    }
+
+    const hideAddTeacher = () => {
+        setIsAddTeacher(false)
+    }
 
     return (
         <div className="teacher-list">
@@ -17,11 +31,28 @@ function TeacherList() {
                 <tbody>
                     { teacherList.map((teacher) => {
                             return (<tr>
-                                <td><TeacherInCoursePage name={teacher} /></td>
+                                <td><TeacherInProgramPage name={teacher} /></td>
                             </tr>
                     )})}
+                    {
+                        teacherList.length == 0 &&
+                        <tr>
+                            <td><span>No teachers added yet</span></td>
+                        </tr>
+
+                    }
                 </tbody>
             </table>
+
+            { props.permission === 2 &&
+                <div className="add-teacher">
+                    <Button onClick={showAddTeacher}>Add Teacher</Button>
+                    {
+                        isAddTeacher &&
+                        <AddTeacher show={isAddTeacher} onHide={hideAddTeacher} id={props.id}/>
+                    }
+                </div>
+            }
         </div>
     );
 }

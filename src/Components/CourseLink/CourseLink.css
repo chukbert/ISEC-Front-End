@@ -1,4 +1,4 @@
-.topic-link {
+.course-link {
     /* margin: 2em; */
     background-color: lightblue;
     padding: 2em;
@@ -8,19 +8,6 @@
     margin: 2em 0 0 4em;
 }
 
-.topic-link span {
+.course-link span {
     margin-right: 1.5em;
-}
-
-.topic-link > a {
-    text-decoration: none;
-    color: black;
-}
-
-.topic-link > a:hover {
-    color: blue;
-}
-
-.topic-link button {
-    float: right;
 }
