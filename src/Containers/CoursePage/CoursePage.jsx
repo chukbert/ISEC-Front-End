@@ -29,6 +29,7 @@ class CoursePage extends React.Component {
 
         this.showEditCourse = this.showEditCourse.bind(this);
         this.hideEditCourse = this.hideEditCourse.bind(this);
+        this.checkToken = this.checkToken.bind(this);
     }
 
     showAddModal() {
@@ -62,6 +63,29 @@ class CoursePage extends React.Component {
         });
     }
 
+    checkToken = async () => {
+        const api = process.env.REACT_APP_API_HOST + '/users/auth'
+        try {
+            const response = await axios.post(api, {}, {
+                headers: {
+                    "Authorization": `${Cookies.get('token')}`
+                }
+            })
+
+            if (response.data.success) {
+                this.setState({
+                    permission: response.data.role,
+                })
+            } else {
+                Cookies.remove('token');
+                window.location.href="/";
+            }
+        } catch (err) {
+            Cookies.remove('token');
+            window.location.href="/";
+        }
+    }
+
     componentDidMount() {
         // this.clearArray();
 
@@ -79,6 +103,7 @@ class CoursePage extends React.Component {
         //         })
         //     }
         // })
+        this.checkToken();
         const programId = this.props.match.params.program_id;
         const courseId = this.props.match.params.course_id;
         const api = process.env.REACT_APP_API_HOST + '/enrollprograms/' + programId 

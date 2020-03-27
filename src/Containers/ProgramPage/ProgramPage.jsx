@@ -18,7 +18,6 @@ class ProgramPage extends React.Component {
             name: '',
             description: '',
             listOfCourse: [],
-            listOfIsShowCourse: [],
             listOfTeacher: [],
 
             isAddCourse: false,
@@ -27,6 +26,7 @@ class ProgramPage extends React.Component {
         this.clearArray = this.clearArray.bind(this);
         this.showAddCourse = this.showAddCourse.bind(this);
         this.hideAddCourse = this.hideAddCourse.bind(this);
+        this.checkToken = this.checkToken.bind(this);
     }
 
     showAddCourse() {
@@ -47,7 +47,31 @@ class ProgramPage extends React.Component {
         });
     }
 
+    checkToken = async () => {
+        const api = process.env.REACT_APP_API_HOST + '/users/auth'
+        try {
+            const response = await axios.post(api, {}, {
+                headers: {
+                    "Authorization": `${Cookies.get('token')}`
+                }
+            })
+
+            if (response.data.success) {
+                this.setState({
+                    permission: response.data.role,
+                })
+            } else {
+                Cookies.remove('token');
+                window.location.href="/";
+            }
+        } catch (err) {
+            Cookies.remove('token');
+            window.location.href="/";
+        }
+    }
+
     componentDidMount() {
+        this.checkToken();
         this.clearArray();
         const program_id = this.props.match.params.program_id;
 
