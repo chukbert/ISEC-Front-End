@@ -17,10 +17,15 @@ const TopicLink = (props) => {
     return (
         <div className="topic-link">
             <span>&#9654;</span><a href={props.link}>{props.topicName}</a>
-            <Button onClick={showEditModal}>Edit Topic</Button>
             {
-                isShowEditModal &&
-                <EditTopic show={showEditModal} onHide={hideEditModal} id={props.topicId}/>
+                (props.permission === 1 || props.permission === 2) &&
+                <div>
+                    <Button onClick={showEditModal}>Edit Topic</Button>
+                    {
+                        isShowEditModal &&
+                        <EditTopic show={showEditModal} onHide={hideEditModal} id={props.topicId}/>
+                    }
+                </div>
             }
         </div>
     )

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import { Modal, Form, Button } from 'react-bootstrap'
 import axios from 'axios';
 import './EditTopic.css';
@@ -12,7 +13,11 @@ function EditTopic(props) {
 
     const editTopic = () => {
         const api = process.env.REACT_APP_API_HOST + '/topics/edit/' + props.id;
-        axios.patch(api, {"name": name}).then(function() {
+        axios.patch(api, {"name": name},  {
+            headers: {
+                "Authorization": `${Cookies.get('token')}`
+            }
+        }).then(function() {
             window.location.reload();
         })
     }
@@ -34,8 +39,8 @@ function EditTopic(props) {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={props.onHide} btnStyle="primary">Cancel</Button>
-                    <Button onClick={editTopic} btnStyle="primary">Save</Button>
+                    <Button onClick={props.onHide} variant="secondary">Cancel</Button>
+                    <Button onClick={editTopic} variant="primary">Save</Button>
                 </Modal.Footer>
             </Modal>
         </div>

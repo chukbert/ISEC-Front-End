@@ -17,6 +17,17 @@
     padding: 0.5em;
     border: 1px solid lightgray;
 }
+
+.teacher-list td span {
+    color: gray;
+}
+
 .teacher-list tr:last-child td {
     border-radius: 0 0 12px 12px;
+}
+
+.add-teacher button {
+    margin: auto;
+    margin-top: 0.5em;
+    display: table;
 }
