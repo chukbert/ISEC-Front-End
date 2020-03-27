@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 
 import ProgramPage from '../ProgramPage/ProgramPage';
 import CoursePage from '../CoursePage/CoursePage';
+import './Home.css';
 
 class Home extends React.Component {
     constructor(props) {
