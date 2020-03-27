@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 import { Modal, Form, Button } from 'react-bootstrap'
 import './EditCourse.css';
@@ -23,11 +24,11 @@ function EditCourse(props) {
     const editCourse = () => {
         const api = process.env.REACT_APP_API_HOST + '/courses/edit/' + props.id;
         axios.patch(api, {"name": name, "code": code, "description": description},
-        // {
-        //     headers: {
-        //         "Authorization": `${Cookies.get('token')}`
-        //     }
-        // }
+        {
+            headers: {
+                "Authorization": `${Cookies.get('token')}`
+            }
+        }
         ).then(function() {
             window.location.reload();
         })

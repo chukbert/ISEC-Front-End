@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 import { Modal, Form, Button } from 'react-bootstrap'
 import './AddCourse.css';
@@ -22,7 +23,11 @@ function AddCourse(props) {
 
     const createNewCourse = () => {
         const api = process.env.REACT_APP_API_HOST + '/courses/new'
-        axios.post(api, {"name": name, "code": code, "description": description}).then(function() {
+        axios.post(api, {"name": name, "code": code, "description": description}, {
+            headers: {
+                "Authorization": `${Cookies.get('token')}`
+            }
+        }).then(function() {
             window.location.reload();
         })
     }

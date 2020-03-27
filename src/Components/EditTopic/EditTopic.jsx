@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import { Modal, Form, Button } from 'react-bootstrap'
 import axios from 'axios';
 import './EditTopic.css';
@@ -12,7 +13,11 @@ function EditTopic(props) {
 
     const editTopic = () => {
         const api = process.env.REACT_APP_API_HOST + '/topics/edit/' + props.id;
-        axios.patch(api, {"name": name}).then(function() {
+        axios.patch(api, {"name": name},  {
+            headers: {
+                "Authorization": `${Cookies.get('token')}`
+            }
+        }).then(function() {
             window.location.reload();
         })
     }
