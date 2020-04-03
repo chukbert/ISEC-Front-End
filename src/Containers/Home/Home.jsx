@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import ProgramPage from '../ProgramPage/ProgramPage';
 import CoursePage from '../CoursePage/CoursePage';
 import ListEnrolledProgram from '../ListEnrolledProgram/ListEnrolledProgram';
+import ListProgram from '../ListProgram/ListProgram';
 import './Home.css';
 
 class Home extends React.Component {
@@ -32,7 +33,7 @@ class Home extends React.Component {
                         </div>
                         <Nav className="mr-auto">
                             <Nav.Link href="/courses">Courses</Nav.Link>
-                            <Nav.Link href="/enrollprograms/5e7cd0babe742b001dbfaf83">Programs</Nav.Link>
+                            <Nav.Link href="/programs">Programs</Nav.Link>
                         </Nav>
                         <NavDropdown title="User" id="nav-dropdown">
                             <NavDropdown.Item href="/" onClick={this.logout}>Logout</NavDropdown.Item>
@@ -48,6 +49,7 @@ class Home extends React.Component {
                         </Route> */}
                         <Route path="/" component={ListEnrolledProgram} />
                         <Route path="/enrollprograms/:program_id" component={ProgramPage} />
+                        <Route path="/programs" component={ListProgram} />
                         <Route path="/courses/:program_id/:course_id" component={CoursePage}/>
                     </Switch>
                 </Router>
