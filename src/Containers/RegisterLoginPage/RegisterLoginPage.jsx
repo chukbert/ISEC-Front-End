@@ -11,25 +11,29 @@ class RegisterLoginPage extends React.Component {
     }
 
     render() {
-        return(
-            <div className="App">
-                <Router>
-                    <Navbar fixed="top" expand="lg">
-                        <div className="app-name">
-                            <Navbar.Brand href="/">ISEC</Navbar.Brand>
-                        </div>
-                        {/* <Nav className="mr-auto">
-                            <Nav.Link href="/">Sign In</Nav.Link>
-                            <Nav.Link href="/register">Sign Up</Nav.Link>
-                        </Nav> */}
-                    </Navbar>
+        // return(
+        //     <div className="App">
+        //         <Router>
+        //             <Navbar fixed="top" expand="lg">
+        //                 <div className="app-name">
+        //                     <Navbar.Brand href="/">ISEC</Navbar.Brand>
+        //                 </div>
+        //                 {/* <Nav className="mr-auto">
+        //                     <Nav.Link href="/">Sign In</Nav.Link>
+        //                     <Nav.Link href="/register">Sign Up</Nav.Link>
+        //                 </Nav> */}
+        //             </Navbar>
 
-                    <Switch>
-                        <Route exact path="/" component={LoginPage} />
-                        <Route exact path="/register" component={RegisterPage}/>
-                    </Switch>
-                </Router>
-            </div>
+        //             <Switch>
+        //                 <Route exact path="/" component={LoginPage} />
+        //                 <Route exact path="/register" component={RegisterPage}/>
+        //             </Switch>
+        //         </Router>
+        //         <span>H</span>
+        //     </div>
+        // )
+        return(
+            <h1>Hello</h1>
         )
     }
 }

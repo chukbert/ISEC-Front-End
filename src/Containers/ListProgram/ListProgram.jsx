@@ -4,6 +4,8 @@ import Cookies from 'js-cookie';
 
 import ProgramLink from '../../Components/ProgramLink/ProgramLink';
 
+import './ListProgram.css';
+
 class ListProgram extends React.Component {
     constructor(props) {
         super()
@@ -106,11 +108,10 @@ class ListProgram extends React.Component {
 
     render() {
         return (
-            <div className="program-page">
-                <div className="program-title">
+            <div>
+                <div className="list-program">
                     <h1>Programs</h1>
                 </div>
-
 
                 <div className="course-list">
                     {

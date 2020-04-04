@@ -29,7 +29,7 @@ class Home extends React.Component {
                 <Router>
                     <Navbar fixed="top" expand="lg">
                         <div className="app-name">
-                            <Navbar.Brand href="/">ISEC</Navbar.Brand>
+                            <Navbar.Brand href="/profile">ISEC</Navbar.Brand>
                         </div>
                         <Nav className="mr-auto">
                             <Nav.Link href="/courses">Courses</Nav.Link>
@@ -41,9 +41,9 @@ class Home extends React.Component {
                     </Navbar>
 
                     <Switch>
-                        <Route path="/" component={ListEnrolledProgram} />
-                        <Route path="/enrollprogram/:program_id" component={ProgramPage} />
+                        <Route path="/profile" component={ListEnrolledProgram} />
                         <Route path="/programs" component={ListProgram} />
+                        <Route path="/enrollprogram/:program_id" component={ProgramPage} />
                         <Route path="/courses/:program_id/:course_id" component={CoursePage}/>
                     </Switch>
                 </Router>
