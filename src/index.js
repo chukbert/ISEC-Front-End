@@ -11,7 +11,6 @@ import RegisterPage from './Containers/RegisterPage/RegisterPage';
 
 ReactDOM.render(<LoginPage />, document.getElementById('root'));
 
-
 // ReactDOM.render(<ProgramPage id="5e7cd0babe742b001dbfaf83" permission={2}/>, document.getElementById('root'));
 // ReactDOM.render(<CoursePage permission={2} id={1}/>, document.getElementById('root'));
 

@@ -3,12 +3,8 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Form, Button } from 'react-bootstrap';
 import './LoginPage.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-
-// import ProgramPage from '../ProgramPage/ProgramPage';
 import Home from '../Home/Home';
-import RegisterPage from '../RegisterPage/RegisterPage';
 
 class LoginPage extends React.Component {
     constructor() {
