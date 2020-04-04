@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 
 import ProgramPage from '../ProgramPage/ProgramPage';
 import CoursePage from '../CoursePage/CoursePage';
+import ListEnrolledProgram from '../ListEnrolledProgram/ListEnrolledProgram';
 import './Home.css';
 
 class Home extends React.Component {
@@ -45,10 +46,12 @@ class Home extends React.Component {
                         {/* <Route path="/programs">
                             <ProgramPage id="5e7cd0babe742b001dbfaf83" permission={this.state.permission}/>
                         </Route> */}
+                        <Route path="/" component={ListEnrolledProgram} />
                         <Route path="/enrollprograms/:program_id" component={ProgramPage} />
                         <Route path="/courses/:program_id/:course_id" component={CoursePage}/>
                     </Switch>
                 </Router>
+                
             </div>
         )
     }
