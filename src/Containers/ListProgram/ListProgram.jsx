@@ -5,25 +5,20 @@ import Cookies from 'js-cookie';
 import ProgramLink from '../../Components/ProgramLink/ProgramLink';
 
 // import './ProgramPage.css';
-import { Button } from 'react-bootstrap';
 
 class ListProgram extends React.Component {
     constructor(props) {
         super()
         this.state = {
             permission: 0,
+            listOfEnrolledPrograms: [],
             listOfPrograms: [],
         }
 
-        this.clearArray = this.clearArray.bind(this);
         this.checkToken = this.checkToken.bind(this);
+        this.getAllEnrolledPrograms = this.getAllEnrolledPrograms.bind(this);
         this.parseResult = this.parseResult.bind(this);
-    }
-
-    clearArray() {
-        this.setState({ 
-            listOfPrograms: [],
-        });
+        this.getPrograms = this.getPrograms.bind(this);
     }
 
     checkToken = async () => {
@@ -47,6 +42,37 @@ class ListProgram extends React.Component {
             Cookies.remove('token');
             window.location.href="/";
         }
+        return;
+    }
+
+    getAllEnrolledPrograms = async () => {
+        const api = process.env.REACT_APP_API_HOST + '/enrollprograms';
+        await axios.get(api, {
+            headers: {
+                "Authorization": `${Cookies.get('token')}`
+            }
+        }).then(res => {
+            for (var i = 0; i < res.data.data.length; i++) {
+                var programId = res.data.data[i].program_id;
+                let status = res.data.data[i].status_program;
+
+                this.state.listOfEnrolledPrograms.push({"id": programId, "status": status});
+                this.setState({
+                    listOfEnrolledPrograms: this.state.listOfEnrolledPrograms,
+                })
+            }
+        })
+        return;
+    }
+
+    checkProgramStatus(programId) {
+        var status = 0;
+        this.state.listOfEnrolledPrograms.forEach(item => {
+            if (item.id === programId) {
+                status = item.status;
+            }
+        });
+        return status;
     }
 
     parseResult(res) {
@@ -54,7 +80,7 @@ class ListProgram extends React.Component {
             var programId = res[i]._id;
             var name = res[i].name;
             var description = res[i].description;
-            var status = res[i].__v;
+            var status = this.checkProgramStatus(programId);
             this.state.listOfPrograms.push({"id": programId, "name": name, "description":description, "status": status});
             this.setState({
                 listOfPrograms: this.state.listOfPrograms,
@@ -62,9 +88,9 @@ class ListProgram extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.checkToken();
-        this.clearArray();
+    async getPrograms(){
+        await this.checkToken();
+        await this.getAllEnrolledPrograms();
 
         const api = process.env.REACT_APP_API_HOST + '/programs';
         axios.get(api, {
@@ -74,6 +100,10 @@ class ListProgram extends React.Component {
         }).then(res => {
             this.parseResult(res.data.data);            
         })
+    }
+
+    componentDidMount() {
+        this.getPrograms();
     }
 
     render() {
