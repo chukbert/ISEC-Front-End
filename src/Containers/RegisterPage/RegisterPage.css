@@ -1,4 +1,4 @@
-.login-page {
+.register-page {
     width: 40%;
     margin: auto;
     margin-top: 10em;
@@ -6,7 +6,7 @@
     border: solid 1px gainsboro;
 }
 
-.link-regist {
+.link-login {
     margin-top: 1em;
     color: black;
     display: block;
