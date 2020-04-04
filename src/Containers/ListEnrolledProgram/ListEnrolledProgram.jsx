@@ -51,7 +51,7 @@ class ListEnrolledProgram extends React.Component {
     }
 
     parsePrograms(id) {
-        for (var i = 0; i < 1; i++){
+        for (var i = 0; i < id.length; i++){
             const api = process.env.REACT_APP_API_HOST + '/enrollprograms/' + id[i];
             axios.get(api, {
                 headers: {
