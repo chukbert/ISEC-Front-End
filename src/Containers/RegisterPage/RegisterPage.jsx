@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 // import ProgramPage from '../ProgramPage/ProgramPage';
 import Home from '../Home/Home';
+import LoginPage from '../LoginPage/LoginPage';
 
 class RegisterPage extends React.Component {
     constructor() {
@@ -20,10 +21,12 @@ class RegisterPage extends React.Component {
             isTokenValid: false,
             isError: false,
             isSubmit: false,
+            isLogin: false
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.checkToken = this.checkToken.bind(this)
+        this.changeLoginPage = this.changeLoginPage.bind(this)
     }
 
     handleChange(e) {
@@ -117,6 +120,10 @@ class RegisterPage extends React.Component {
         })
     }
 
+    changeLoginPage() {
+        this.setState({ isLogin: true });
+    }
+
     render() {
         if (Cookies.get('token')){
             if (this.state.isTokenValid) {
@@ -128,57 +135,63 @@ class RegisterPage extends React.Component {
                 return null
             }
         } else {
-            return (
-                <div className="register-page">
-                    <Form>
-                        <Form.Group controlId="registerUsername">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control name="username" type="username" onChange={this.handleChange}/>
-                        </Form.Group>
-                        <Form.Group controlId="registerEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control name="email" type="email" onChange={this.handleChange}/>
-                        </Form.Group>
-                        <Form.Group controlId="registerPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control name="password" type="password" onChange={this.handleChange}/>
-                        </Form.Group>
-                        <Form.Group controlId="registerRole">
-                            <Form.Label>Role</Form.Label>
-                            <form onSubmit={this.handleFormSubmit}>
-                            <div className="radio">
-                                <label>
-                                <input name="role" type="radio" value="0" checked={this.state.role === 0} onChange={this.handleChange} />
-                                Student
-                                </label>
-                            </div>
-                            <div className="radio">
-                                <label>
-                                <input name="role" type="radio" value="1" checked={this.state.role === 1} onChange={this.handleChange} />
-                                Teacher
-                                </label>
-                            </div>
-                            <div className="radio">
-                                <label>
-                                <input name="role" type="radio" value="2" checked={this.state.role === 2} onChange={this.handleChange} />
-                                Admin
-                                </label>
-                            </div>
-                            </form>
-                            <Link className="link-login" to="/">Already have an account? Sign in here</Link>
-                        </Form.Group>
-                        
-                        <Button variant="primary" type="submit" onClick={this.handleSubmit}>
-                            Sing Up
-                        </Button>
-                        {
-                            this.state.isError &&
-                            <span>ERROR</span>
-                        }
-                    </Form>
-                </div>
-                
-            )
+            if (!this.state.isLogin) {
+                return (
+                    <div className="register-page">
+                        <Form>
+                            <Form.Group controlId="registerUsername">
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control name="username" type="username" onChange={this.handleChange}/>
+                            </Form.Group>
+                            <Form.Group controlId="registerEmail">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control name="email" type="email" onChange={this.handleChange}/>
+                            </Form.Group>
+                            <Form.Group controlId="registerPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control name="password" type="password" onChange={this.handleChange}/>
+                            </Form.Group>
+                            <Form.Group controlId="registerRole">
+                                <Form.Label>Role</Form.Label>
+                                <form onSubmit={this.handleFormSubmit}>
+                                <div className="radio">
+                                    <label>
+                                    <input name="role" type="radio" value="0" checked={this.state.role === 0} onChange={this.handleChange} />
+                                    Student
+                                    </label>
+                                </div>
+                                <div className="radio">
+                                    <label>
+                                    <input name="role" type="radio" value="1" checked={this.state.role === 1} onChange={this.handleChange} />
+                                    Teacher
+                                    </label>
+                                </div>
+                                <div className="radio">
+                                    <label>
+                                    <input name="role" type="radio" value="2" checked={this.state.role === 2} onChange={this.handleChange} />
+                                    Admin
+                                    </label>
+                                </div>
+                                </form>
+                            </Form.Group>
+                            
+                            <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+                                Sing Up
+                            </Button>
+                            {
+                                this.state.isError &&
+                                <span>ERROR</span>
+                            }
+                            <p className="link-login" onClick={this.changeLoginPage}>Already have an account? Sign in here</p>
+                        </Form>
+                    </div>
+                    
+                )
+            } else {
+                return (
+                    <LoginPage/>
+                )
+            }
         }
     }
 }
