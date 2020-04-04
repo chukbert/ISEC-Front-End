@@ -3,6 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { Form, Button } from 'react-bootstrap';
 import './RegisterPage.css';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 // import ProgramPage from '../ProgramPage/ProgramPage';
 import Home from '../Home/Home';
@@ -164,10 +165,11 @@ class RegisterPage extends React.Component {
                                 </label>
                             </div>
                             </form>
+                            <Link className="link-login" to="/">Already have an account? Sign in here</Link>
                         </Form.Group>
                         
                         <Button variant="primary" type="submit" onClick={this.handleSubmit}>
-                            Regist
+                            Sing Up
                         </Button>
                         {
                             this.state.isError &&

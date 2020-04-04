@@ -1,7 +1,13 @@
 .login-page {
     width: 40%;
     margin: auto;
-    margin-top: 20em;
+    margin-top: 10em;
     padding: 5em;
     border: solid 1px gainsboro;
+}
+
+.link-regist {
+    margin-top: 1em;
+    color: black;
+    display: block;
 }
