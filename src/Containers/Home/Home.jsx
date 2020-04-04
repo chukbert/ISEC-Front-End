@@ -29,10 +29,10 @@ class Home extends React.Component {
                 <Router>
                     <Navbar fixed="top" expand="lg">
                         <div className="app-name">
-                            <Navbar.Brand href="/profile">ISEC</Navbar.Brand>
+                            <Navbar.Brand href="/">ISEC</Navbar.Brand>
                         </div>
                         <Nav className="mr-auto">
-                            <Nav.Link href="/courses">Courses</Nav.Link>
+                            {/* <Nav.Link href="/courses">Courses</Nav.Link> */}
                             <Nav.Link href="/programs">Programs</Nav.Link>
                         </Nav>
                         <NavDropdown title="User" id="nav-dropdown">
@@ -41,10 +41,11 @@ class Home extends React.Component {
                     </Navbar>
 
                     <Switch>
-                        <Route path="/profile" component={ListEnrolledProgram} />
-                        <Route path="/programs" component={ListProgram} />
-                        <Route path="/enrollprogram/:program_id" component={ProgramPage} />
+                        {/* <Route path="/topic/:program_id/:course_id/:topic_id" component={TopicPage} */}
                         <Route path="/courses/:program_id/:course_id" component={CoursePage}/>
+                        <Route path="/enrollprogram/:program_id" component={ProgramPage} />
+                        <Route path="/programs" component={ListProgram} />
+                        <Route path="/" component={ListEnrolledProgram} />
                     </Switch>
                 </Router>
                 
