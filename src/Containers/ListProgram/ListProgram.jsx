@@ -4,8 +4,6 @@ import Cookies from 'js-cookie';
 
 import ProgramLink from '../../Components/ProgramLink/ProgramLink';
 
-// import './ProgramPage.css';
-
 class ListProgram extends React.Component {
     constructor(props) {
         super()
@@ -125,16 +123,6 @@ class ListProgram extends React.Component {
                         ))
                     }
                 </div>
-
-                {/* {(this.state.permission === 2) &&
-                <div className="add-program-button">
-                    <Button variant="primary" onClick={this.showAddCourse}>Add Program</Button>
-                    {
-                        this.state.isAddCourse &&
-                        <AddCourse show={this.state.isAddCourse} onHide={this.hideAddCourse}/>
-                    }
-                </div>
-                } */}
             </div>
         )
     }

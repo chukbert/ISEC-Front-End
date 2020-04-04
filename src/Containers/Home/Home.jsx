@@ -41,12 +41,6 @@ class Home extends React.Component {
                     </Navbar>
 
                     <Switch>
-                        {/* <Route path="/">
-                            <h1>HOME</h1>
-                        </Route> */}
-                        {/* <Route path="/programs">
-                            <ProgramPage id="5e7cd0babe742b001dbfaf83" permission={this.state.permission}/>
-                        </Route> */}
                         <Route path="/" component={ListEnrolledProgram} />
                         <Route path="/enrollprograms/:program_id" component={ProgramPage} />
                         <Route path="/programs" component={ListProgram} />
