@@ -32,12 +32,12 @@ const ProgramLink = (props) => {
                 "Authorization": `${Cookies.get('token')}`
             }
         }).then(() => {
-            window.location.href="/enrollprograms/" + programId;
+            window.location.href="/enrollprogram/" + programId;
         })
     }
 
     const continueProgram = () => {
-        window.location.href="/enrolledprograms/" + programId;
+        window.location.href="/enrollprogram/" + programId;
     }
 
     return(
