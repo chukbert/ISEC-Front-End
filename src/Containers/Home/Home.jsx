@@ -42,7 +42,7 @@ class Home extends React.Component {
 
                     <Switch>
                         <Route path="/" component={ListEnrolledProgram} />
-                        <Route path="/enrollprograms/:program_id" component={ProgramPage} />
+                        <Route path="/enrollprogram/:program_id" component={ProgramPage} />
                         <Route path="/programs" component={ListProgram} />
                         <Route path="/courses/:program_id/:course_id" component={CoursePage}/>
                     </Switch>
