@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  frontend:
+    image: ${DOCKER_HUB_USERNAME}/isec-backend:${CI_COMMIT_SHORT_SHA}
+    container_name: frontend
+    ports:
+      - 17030:80
