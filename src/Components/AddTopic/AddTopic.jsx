@@ -12,7 +12,7 @@ function AddTopic(props) {
     }
 
     const createNewTopic = () => {
-        const api = process.env.REACT_APP_API_HOST + '/topics/new' + props.id;
+        const api = process.env.REACT_APP_API_HOST + '/topics/new/' + props.id;
         axios.post(api, {"name": name},  {
             headers: {
                 "Authorization": `${Cookies.get('token')}`
