@@ -38,7 +38,13 @@ const CourseLink = (props) => {
 
     return (
         <div className="course-link" onClick={showDescription}>
-            <span>&#9654;</span>{props.name}
+            { !isShowDescription &&
+                <span>&#9654;</span>
+            }
+            { isShowDescription &&
+                <span>&#9660;</span>
+            }
+            {props.name}
             {
                 isShowDescription &&
                 <div>

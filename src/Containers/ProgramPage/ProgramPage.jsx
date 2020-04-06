@@ -81,6 +81,7 @@ class ProgramPage extends React.Component {
                 "Authorization": `${Cookies.get('token')}`
             }
         }).then(res => {
+            console.log(res);
             this.setState({
                 id: program_id,
                 name: res.data.data.program_id.name,
