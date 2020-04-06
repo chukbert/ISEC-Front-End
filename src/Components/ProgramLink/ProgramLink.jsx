@@ -52,7 +52,7 @@ const ProgramLink = (props) => {
             {
                 isShowDescription &&
                 <div>
-                    <p> Description : {description}</p>
+                    <p><b>Description :</b> {description}</p>
                     {handleButton(status)}
                 </div>
             }

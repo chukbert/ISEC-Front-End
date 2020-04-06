@@ -25,7 +25,6 @@ function NavbarApp(props) {
                         <Navbar.Brand href="/">ISEC</Navbar.Brand>
                     </div>
                     <Nav className="mr-auto">
-                        <Nav.Link>Courses</Nav.Link>
                         <Nav.Link onClick={toProgram}>Programs</Nav.Link>
                     </Nav>
                     <NavDropdown title="User" id="nav-dropdown">

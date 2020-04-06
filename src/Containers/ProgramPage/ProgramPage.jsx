@@ -81,7 +81,6 @@ class ProgramPage extends React.Component {
                 "Authorization": `${Cookies.get('token')}`
             }
         }).then(res => {
-            console.log(res);
             this.setState({
                 id: program_id,
                 name: res.data.data.program_id.name,
@@ -140,7 +139,7 @@ class ProgramPage extends React.Component {
                     <Button variant="primary" onClick={this.showAddCourse}>Add Course</Button>
                     {
                         this.state.isAddCourse &&
-                        <AddCourse show={this.state.isAddCourse} onHide={this.hideAddCourse}/>
+                        <AddCourse show={this.state.isAddCourse} onHide={this.hideAddCourse} id={this.state.id}/>
                     }
                 </div>
                 }

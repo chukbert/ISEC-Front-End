@@ -35,7 +35,7 @@ function TeacherList(props) {
                             </tr>
                     )})}
                     {
-                        teacherList.length == 0 &&
+                        teacherList.length === 0 &&
                         <tr>
                             <td><span>No teachers added yet</span></td>
                         </tr>

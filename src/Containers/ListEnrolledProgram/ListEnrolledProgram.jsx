@@ -3,6 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import ProgramLink from '../../Components/ProgramLink/ProgramLink';
+import './ListEnrolledProgram.css'
 
 // import './ProgramPage.css';
 

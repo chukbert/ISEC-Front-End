@@ -48,7 +48,7 @@ const CourseLink = (props) => {
             {
                 isShowDescription &&
                 <div>
-                    <p> Description : {description}</p>
+                    <p><b>Description :</b> {description}</p>
                     {
                         props.prerequisite.length > 0 &&
                         <p>Prerequisite : {props.prerequisite}</p>

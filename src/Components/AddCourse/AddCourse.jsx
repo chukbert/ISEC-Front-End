@@ -22,7 +22,7 @@ function AddCourse(props) {
     }
 
     const createNewCourse = () => {
-        const api = process.env.REACT_APP_API_HOST + '/courses/new'
+        const api = process.env.REACT_APP_API_HOST + '/courses/new/' + props.id
         axios.post(api, {"name": name, "code": code, "description": description}, {
             headers: {
                 "Authorization": `${Cookies.get('token')}`
@@ -44,7 +44,7 @@ function AddCourse(props) {
                     <Form>
                         <Form.Group controlId="form-add-course">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="name" placeholder="Enter course name" onChange={handleChangeName}/>
+                            <Form.Control type="name" placeholder={"Enter course name"} onChange={handleChangeName}/>
                             <Form.Label>Code</Form.Label>
                             <Form.Control type="code" placeholder="Enter course code" onChange={handleChangeCode}/>
                             <Form.Label>Description</Form.Label>
