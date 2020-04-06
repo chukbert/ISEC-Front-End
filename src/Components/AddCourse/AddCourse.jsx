@@ -22,7 +22,7 @@ function AddCourse(props) {
     }
 
     const createNewCourse = () => {
-        const api = process.env.REACT_APP_API_HOST + '/courses/new/' + props.id
+        const api = process.env.REACT_APP_API_HOST + '/programs/course/' + props.id;
         axios.post(api, {"name": name, "code": code, "description": description}, {
             headers: {
                 "Authorization": `${Cookies.get('token')}`

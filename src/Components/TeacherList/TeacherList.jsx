@@ -8,9 +8,10 @@ import './TeacherList.css';
 
 function TeacherList(props) {
     // eslint-disable-next-line no-unused-vars
-    // const [teacherList, setTeacherList] = useState(props.teachers)
-    const [teacherList, setTeacherList] = useState(props.teachers)
-    const [isAddTeacher, setIsAddTeacher] = useState(false)
+    const [teacherList, setTeacherList] = useState(props.teachers);
+    console.log(props.teachers);
+    console.log(teacherList);
+    const [isAddTeacher, setIsAddTeacher] = useState(false);
 
     const showAddTeacher = () => {
         setIsAddTeacher(true)
@@ -29,13 +30,14 @@ function TeacherList(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    { teacherList.map((teacher) => {
+                    { 
+                    props.teachers.map((teacher) => {
                             return (<tr>
                                 <td><TeacherInProgramPage name={teacher} /></td>
                             </tr>
                     )})}
                     {
-                        teacherList.length === 0 &&
+                        props.teachers.length === 0 &&
                         <tr>
                             <td><span>No teachers added yet</span></td>
                         </tr>
