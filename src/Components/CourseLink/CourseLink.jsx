@@ -38,11 +38,17 @@ const CourseLink = (props) => {
 
     return (
         <div className="course-link" onClick={showDescription}>
-            <span>&#9654;</span>{props.name}
+            { !isShowDescription &&
+                <span>&#9654;</span>
+            }
+            { isShowDescription &&
+                <span>&#9660;</span>
+            }
+            {props.name}
             {
                 isShowDescription &&
                 <div>
-                    <p> Description : {description}</p>
+                    <p><b>Description :</b> {description}</p>
                     {
                         props.prerequisite.length > 0 &&
                         <p>Prerequisite : {props.prerequisite}</p>

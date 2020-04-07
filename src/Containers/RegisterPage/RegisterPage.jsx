@@ -128,7 +128,7 @@ class RegisterPage extends React.Component {
         if (Cookies.get('token')){
             if (this.state.isTokenValid) {
                 return (
-                    <Home permission={this.state.permission} />
+                    <Home permission={this.state.permission} username={this.state.username}/>
                 )
             } else {
                 this.checkToken();

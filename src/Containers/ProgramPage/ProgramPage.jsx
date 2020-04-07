@@ -70,6 +70,26 @@ class ProgramPage extends React.Component {
         }
     }
 
+    parseCourses(id, prereq) {
+        for (var i = 0; i < id.length; i++){
+            const api = process.env.REACT_APP_API_HOST + '/courses/' + id[i];
+            axios.get(api, {
+                headers: {
+                    "Authorization": `${Cookies.get('token')}`
+                }
+            }).then(res => {
+                var id = res.data.data._id;
+                var name = res.data.data.name;
+                var code = res.data.data.code;
+                var description = res.data.data.description;
+                this.state.listOfCourse.push({"id": id, "name": name, "code": code, "description": description, "prerequisite": prereq});
+                this.setState({
+                    listOfCourse: this.state.listOfCourse,
+                })
+            })
+        }
+    }
+
     componentDidMount() {
         this.checkToken();
         this.clearArray();
@@ -87,23 +107,25 @@ class ProgramPage extends React.Component {
                 description: res.data.data.program_id.description,
                 listOfTeacher: res.data.data.program_id.list_teacher,
             })
-            for (var i = 0; i < res.data.data.courses.length; i++) {
-                var courseId = res.data.data.courses[i].course_id._id;
-                var courseName = res.data.data.courses[i].course_id.name;
-                var prerequisite = res.data.data.courses[i].prerequisite;
-                var listOfPrerequisite = []
+            var listOfCourseId = [];
+            for (var i = 0; i < res.data.data.program_id.list_course.length; i++) {
+                var courseId = res.data.data.program_id.list_course[i].course_id;
+                listOfCourseId.push(courseId);
+                var prerequisite = res.data.data.program_id.list_course[i].prerequisite;
+                var listOfPrerequisite = [];
                 for (var j = 0; j < prerequisite.length; j++) {
-                    listOfPrerequisite.push(prerequisite[j].name)
+                    listOfPrerequisite.push(prerequisite[j])
                 }
-                var status = res.data.data.courses[i].status_course;
+                // var status = res.data.data.program_id.list_course[i].status_course;
 
-                this.state.listOfCourse.push({"id": courseId, "name": courseName, "prerequisite": listOfPrerequisite, "status": status});
+                // this.state.listOfCourse.push({"id": courseId, "name": courseName, "prerequisite": listOfPrerequisite, "status": status});
 
-                this.state.listOfCourse.push()
-                this.setState({
-                    listOfCourse: this.state.listOfCourse,
-                })
+                // this.state.listOfCourse.push()
+                // this.setState({
+                //     listOfCourse: this.state.listOfCourse,
+                // })
             }
+            this.parseCourses(listOfCourseId, listOfPrerequisite)
         })
     }
 
@@ -139,7 +161,7 @@ class ProgramPage extends React.Component {
                     <Button variant="primary" onClick={this.showAddCourse}>Add Course</Button>
                     {
                         this.state.isAddCourse &&
-                        <AddCourse show={this.state.isAddCourse} onHide={this.hideAddCourse}/>
+                        <AddCourse show={this.state.isAddCourse} onHide={this.hideAddCourse} id={this.state.id}/>
                     }
                 </div>
                 }

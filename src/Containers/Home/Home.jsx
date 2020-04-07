@@ -14,6 +14,7 @@ class Home extends React.Component {
         super()
         this.state = {
             permission: props.permission,
+            username: props.username
         }
         this.logout = this.logout.bind(this)
     }
@@ -35,7 +36,7 @@ class Home extends React.Component {
                             {/* <Nav.Link href="/courses">Courses</Nav.Link> */}
                             <Nav.Link href="/programs">Programs</Nav.Link>
                         </Nav>
-                        <NavDropdown title="User" id="nav-dropdown">
+                        <NavDropdown title={this.state.username} id="nav-dropdown">
                             <NavDropdown.Item href="/" onClick={this.logout}>Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Navbar>

@@ -42,11 +42,17 @@ const ProgramLink = (props) => {
 
     return(
         <div className="program-link" onClick={showDescription}>
-            <span>&#9654;</span>{name}
+            { !isShowDescription &&
+                <span>&#9654;</span>
+            }
+            { isShowDescription &&
+                <span>&#9660;</span>
+            }
+            {name}
             {
                 isShowDescription &&
                 <div>
-                    <p> Description : {description}</p>
+                    <p><b>Description :</b> {description}</p>
                     {handleButton(status)}
                 </div>
             }
