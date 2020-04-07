@@ -66,5 +66,4 @@ describe("TopicLink component", () => {
             expect(wrapper.contains(<EditTopic />)).toBe(false);
         });
     });
-
 })
