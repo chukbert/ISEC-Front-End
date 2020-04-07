@@ -118,21 +118,12 @@ class ProgramPage extends React.Component {
                     listOfPrerequisite.push(prerequisite[j]);
                 }
                 var status = null;
-                console.log(this.state.permission);
                 if (this.state.permission === 0) {
                     status = res.data.data.courses[i].status_course;
                 }
                 for (var j = 0; j < prerequisite.length; j++) {
                     listOfPrerequisite.push(prerequisite[j]);
                 }
-                // var status = res.data.data.program_id.list_course[i].status_course;
-
-                // this.state.listOfCourse.push({"id": courseId, "name": courseName, "prerequisite": listOfPrerequisite, "status": status});
-
-                // this.state.listOfCourse.push()
-                // this.setState({
-                //     listOfCourse: this.state.listOfCourse,
-                // })
             }
             this.parseCourses(listOfCourseId, listOfPrerequisite, status)
         })

@@ -8,6 +8,7 @@ function EditCourse(props) {
     const [name, setName] = useState('');
     const [code, setCode] = useState('');
     const [description, setDescription] = useState('');
+    console.log(props.id);
 
     const handleChangeName = (e) => {
         setName(e.target.value);

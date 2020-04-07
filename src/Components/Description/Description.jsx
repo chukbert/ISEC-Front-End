@@ -13,8 +13,7 @@ function Description(props) {
                 <tbody>
                     <tr>
                         <td>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Quisque auctor dictum malesuada. {props.data}
+                            {props.data}
                         </td>
                     </tr>
                 </tbody>
