@@ -24,7 +24,7 @@ describe('Desciption Component', () => {
         const rows = tbody.find('tr');
         expect(rows).toHaveLength(1);
 
-        rows.forEach((tr, rowIndex) => {
+        rows.forEach((tr) => {
             const cells = tr.find('td');
             expect(cells).toHaveLength(1);
 
@@ -53,7 +53,7 @@ describe('Desciption Component', () => {
         const rows = tbody.find('tr');
         expect(rows).toHaveLength(1);
 
-        rows.forEach((tr, rowIndex) => {
+        rows.forEach((tr) => {
             const cells = tr.find('td');
             expect(cells).toHaveLength(1);
 
