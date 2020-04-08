@@ -16,10 +16,12 @@ class LoginPage extends React.Component {
             isTokenValid: false,
             isError: false,
             isSubmit: false,
+            isLogin: true
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.checkToken = this.checkToken.bind(this)
+        this.changeRegisterPage = this.changeRegisterPage.bind(this)
     }
 
     handleChange(e) {
@@ -107,6 +109,10 @@ class LoginPage extends React.Component {
         })
     }
 
+    changeRegisterPage() {
+        this.setState({ isLogin: false });
+    }
+
     render() {
         if (Cookies.get('token')){
             if (this.state.isTokenValid) {
@@ -118,27 +124,34 @@ class LoginPage extends React.Component {
                 return null
             }
         } else {
-            return (
-                <div className="login-page">
-                    <Form>
-                        <Form.Group controlId="loginUsername">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control name="username" type="username" onChange={this.handleChange}/>
-                        </Form.Group>
-                        <Form.Group controlId="loginPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control name="password" type="password" onChange={this.handleChange}/>
-                        </Form.Group>
-                        <Button variant="primary" type="submit" onClick={this.handleSubmit}>
-                            Sign In
-                        </Button>
-                        {
-                            this.state.isError &&
-                            <span>ERROR</span>
-                        }
-                    </Form>
-                </div>
-            )
+            if (this.state.isLogin) {
+                return (
+                    <div className="login-page">
+                        <Form>
+                            <Form.Group controlId="loginUsername">
+                                <Form.Label>Username</Form.Label>
+                                <Form.Control name="username" type="username" onChange={this.handleChange}/>
+                            </Form.Group>
+                            <Form.Group controlId="loginPassword">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control name="password" type="password" onChange={this.handleChange}/>
+                            </Form.Group>
+                            <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+                                Sign In
+                            </Button>
+                            {
+                                this.state.isError &&
+                                <span>ERROR</span>
+                            }
+                            <p className="link-regist" onClick={this.changeRegisterPage}>Don't have account? Register here</p>
+                        </Form>
+                    </div>
+                )
+            } else {
+                return (
+                    <RegisterPage/>
+                )
+            }
         }
     }
 }
