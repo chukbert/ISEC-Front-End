@@ -176,7 +176,7 @@ class RegisterPage extends React.Component {
                             </Form.Group>
                             
                             <Button variant="primary" type="submit" onClick={this.handleSubmit}>
-                                Sing Up
+                                Sign Up
                             </Button>
                             {
                                 this.state.isError &&

@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { Form, Button } from 'react-bootstrap';
 import './LoginPage.css';
 
+import RegisterPage from '../RegisterPage/RegisterPage'
 import Home from '../Home/Home';
 
 class LoginPage extends React.Component {
