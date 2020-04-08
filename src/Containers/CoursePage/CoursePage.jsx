@@ -86,6 +86,25 @@ class CoursePage extends React.Component {
         }
     }
 
+    parseTopics(id) {
+        for (var i = 0; i < id.length; i++){
+            const api = process.env.REACT_APP_API_HOST + '/topics/' + id[i];
+            axios.get(api, {
+                headers: {
+                    "Authorization": `${Cookies.get('token')}`
+                }
+            }).then(res => {
+                console.log(res);
+                var id = res.data.data._id;
+                var name = res.data.data.name;
+                this.state.listOfTopic.push({"id": id, "name": name});
+                this.setState({
+                    listOfTopic: this.state.listOfTopic,
+                })
+            })
+        }
+    }
+
     componentDidMount() {
         // this.clearArray();
 
@@ -106,29 +125,61 @@ class CoursePage extends React.Component {
         this.checkToken();
         const programId = this.props.match.params.program_id;
         const courseId = this.props.match.params.course_id;
-        const api = process.env.REACT_APP_API_HOST + '/enrollprograms/' + programId 
+        console.log(courseId);
+        var api;
+        if (this.props.permission === 0) {
+            api = process.env.REACT_APP_API_HOST + '/enrollprograms/' + programId 
                         + '/courses/' + courseId;
-                        
-        axios.get(api, {
-            headers: {
-                "Authorization": `${Cookies.get('token')}`
-            }
-        }).then(res => {
-            // console.log(res)
-            var topicList = []
-            for (var i = 0; i < res.data.data.topics.length; i++) {
-                var topicId = res.data.data.topics[i].topic_id._id;
-                var topicName = res.data.data.topics[i].topic_id.name;
-                var topicStatus = res.data.data.topics[i].status_topic;
-                topicList.push({"id": topicId, "name": topicName, "status": topicStatus})
-            }
-            this.setState({
-                id: courseId,
-                name: res.data.data.course_id.name,
-                description: res.data.data.course_id.description,
-                listOfTopic: topicList
-            });
-        })
+            axios.get(api, {
+                headers: {
+                    "Authorization": `${Cookies.get('token')}`
+                }
+            }).then(res => {
+                console.log(res)
+                var topicList = []
+                for (var i = 0; i < res.data.data.topics.length; i++) {
+                    var topicId = res.data.data.topics[i].topic_id._id;
+                    var topicName = res.data.data.topics[i].topic_id.name;
+                    var topicStatus = res.data.data.topics[i].status_topic;
+                    topicList.push({"id": topicId, "name": topicName, "status": topicStatus})
+                }
+                this.setState({
+                    id: courseId,
+                    name: res.data.data.course_id.name,
+                    description: res.data.data.course_id.description,
+                    listOfTopic: topicList
+                });
+            })
+        }
+        else {
+            api = process.env.REACT_APP_API_HOST + '/courses/' + courseId;
+            axios.get(api, {
+                headers: {
+                    "Authorization": `${Cookies.get('token')}`
+                }
+            }).then(res => {
+                console.log(res)
+                var topicIdList = []
+                for (var i = 0; i < res.data.data.list_topic.length; i++) {
+                    var topicId = res.data.data.list_topic[i]._id;
+                    topicIdList.push(topicId);
+                }
+                console.log(topicIdList);
+                this.parseTopics(topicIdList);
+                // for (var i = 0; i < res.data.data.list_topic.length; i++) {
+                //     var topicId = res.data.data.list_topic[i].topic_id._id;
+                //     var topicName = res.data.data.list_topic[i].topic_id.name;
+                //     var topicStatus = res.data.data.list_topic[i].status_topic;
+                //     topicList.push({"id": topicId, "name": topicName, "status": topicStatus})
+                // }
+                this.setState({
+                    id: res.data.data._id,
+                    name: res.data.data.name,
+                    description: res.data.data.description,
+                    // listOfTopic: topicList
+                });
+            })
+        } 
     }
 
     render() {
@@ -144,7 +195,7 @@ class CoursePage extends React.Component {
                         <Button variant="primary" onClick={this.showEditCourse}>Edit Course</Button>
                         {
                             this.state.isEditCourse &&
-                            <EditCourse show={this.state.isEditCourse} onHide={this.hideEditCourse}/>
+                            <EditCourse show={this.state.isEditCourse} onHide={this.hideEditCourse} id={this.state.id}/>
                         }
                     </div>
                 }

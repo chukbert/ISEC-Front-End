@@ -66,7 +66,7 @@ const CourseLink = (props) => {
                         <Button onClick={enrollCourse}>Enroll</Button>
                     }
                     {
-                        props.status === 1 &&
+                        (props.status === 1 || props.permission === 2 || props.permission === 1) &&
                         <Button onClick={continueCourse}>Continue</Button>
                     }
                     {

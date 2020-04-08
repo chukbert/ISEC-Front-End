@@ -70,7 +70,7 @@ class ProgramPage extends React.Component {
         }
     }
 
-    parseCourses(id, prereq) {
+    parseCourses(id, prereq, status) {
         for (var i = 0; i < id.length; i++){
             const api = process.env.REACT_APP_API_HOST + '/courses/' + id[i];
             axios.get(api, {
@@ -82,7 +82,7 @@ class ProgramPage extends React.Component {
                 var name = res.data.data.name;
                 var code = res.data.data.code;
                 var description = res.data.data.description;
-                this.state.listOfCourse.push({"id": id, "name": name, "code": code, "description": description, "prerequisite": prereq});
+                this.state.listOfCourse.push({"id": id, "name": name, "code": code, "description": description, "prerequisite": prereq, "status": status});
                 this.setState({
                     listOfCourse: this.state.listOfCourse,
                 })
@@ -101,6 +101,7 @@ class ProgramPage extends React.Component {
                 "Authorization": `${Cookies.get('token')}`
             }
         }).then(res => {
+            console.log(res);
             this.setState({
                 id: program_id,
                 name: res.data.data.program_id.name,
@@ -114,18 +115,17 @@ class ProgramPage extends React.Component {
                 var prerequisite = res.data.data.program_id.list_course[i].prerequisite;
                 var listOfPrerequisite = [];
                 for (var j = 0; j < prerequisite.length; j++) {
-                    listOfPrerequisite.push(prerequisite[j])
+                    listOfPrerequisite.push(prerequisite[j]);
                 }
-                // var status = res.data.data.program_id.list_course[i].status_course;
-
-                // this.state.listOfCourse.push({"id": courseId, "name": courseName, "prerequisite": listOfPrerequisite, "status": status});
-
-                // this.state.listOfCourse.push()
-                // this.setState({
-                //     listOfCourse: this.state.listOfCourse,
-                // })
+                var status = null;
+                if (this.state.permission === 0) {
+                    status = res.data.data.courses[i].status_course;
+                }
+                for (var j = 0; j < prerequisite.length; j++) {
+                    listOfPrerequisite.push(prerequisite[j]);
+                }
             }
-            this.parseCourses(listOfCourseId, listOfPrerequisite)
+            this.parseCourses(listOfCourseId, listOfPrerequisite, status)
         })
     }
 
