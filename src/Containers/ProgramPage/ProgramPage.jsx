@@ -5,6 +5,7 @@ import Description from '../../Components/Description/Description';
 import TeacherList from '../../Components/TeacherList/TeacherList';
 import CourseLink from '../../Components/CourseLink/CourseLink';
 import AddCourse from '../../Components/AddCourse/AddCourse';
+import EditPrerequisite from '../../Components/EditPrerequisite/EditPrerequisite';
 
 import './ProgramPage.css';
 import { Button } from 'react-bootstrap';
@@ -19,13 +20,19 @@ class ProgramPage extends React.Component {
             description: '',
             listOfCourse: [],
             listOfTeacher: [],
-
+            listOfPrerequisite: [],
+            listOfPrerequisiteName: [],
+            listOfCourseName: [],
+            listStatus:[],
             isAddCourse: false,
+            isEditPrerequisite: false,
         }
 
         this.clearArray = this.clearArray.bind(this);
         this.showAddCourse = this.showAddCourse.bind(this);
         this.hideAddCourse = this.hideAddCourse.bind(this);
+        this.showEditPrerequisite = this.showEditPrerequisite.bind(this);
+        this.hideEditPrerequisite = this.hideEditPrerequisite.bind(this);
         this.checkToken = this.checkToken.bind(this);
     }
 
@@ -38,6 +45,18 @@ class ProgramPage extends React.Component {
     hideAddCourse() {
         this.setState({
             isAddCourse: false
+        })
+    }
+
+    showEditPrerequisite() {
+        this.setState({
+            isEditPrerequisite: true
+        })
+    }
+
+    hideEditPrerequisite() {
+        this.setState({
+            isEditPrerequisite: false
         })
     }
 
@@ -70,8 +89,46 @@ class ProgramPage extends React.Component {
         }
     }
 
-    parseCourses(id, prereq, status) {
-        for (var i = 0; i < id.length; i++){
+    getAllCourses = async () => {
+        const api = process.env.REACT_APP_API_HOST + '/courses';
+        await axios.get(api, {
+            headers: {
+                "Authorization": `${Cookies.get('token')}`
+            }
+        }).then(res => {
+            for (var i = 0; i < res.data.data.length; i++) {
+                var courseId = res.data.data[i]._id;
+                let name = res.data.data[i].name;
+
+                this.state.listOfCourseName.push({"id": courseId, "name": name});
+                this.setState({
+                    listOfCourseName: this.state.listOfCourseName
+                })
+            }
+        })
+        return;
+    }
+
+    parsePrerequisite(prereq) {
+        for (var i = 0; i < prereq.length; i++) {
+            if (prereq[i].length === 0) {
+                this.state.listOfPrerequisiteName.push('')
+            } else {
+                for (var j = 0; j < prereq[i].length; j++) {
+                    var listName = []
+                    for (var k = 0; k < this.state.listOfCourseName.length; k++) {
+                        if (prereq[i][j] == this.state.listOfCourseName[k].id) {
+                            listName.push(this.state.listOfCourseName[k].name)
+                        }
+                    }
+                }
+                this.state.listOfPrerequisiteName.push(listName);
+            }
+        }
+    }
+
+    parseCourses(id, status) {
+        for (var i = 0; i < id.length; i++) {
             const api = process.env.REACT_APP_API_HOST + '/courses/' + id[i];
             axios.get(api, {
                 headers: {
@@ -82,7 +139,7 @@ class ProgramPage extends React.Component {
                 var name = res.data.data.name;
                 var code = res.data.data.code;
                 var description = res.data.data.description;
-                this.state.listOfCourse.push({"id": id, "name": name, "code": code, "description": description, "prerequisite": prereq, "status": status});
+                this.state.listOfCourse.push({"id": id, "name": name, "code": code, "description": description});
                 this.setState({
                     listOfCourse: this.state.listOfCourse,
                 })
@@ -93,6 +150,7 @@ class ProgramPage extends React.Component {
     componentDidMount() {
         this.checkToken();
         this.clearArray();
+        this.getAllCourses();
         const program_id = this.props.match.params.program_id;
 
         const api = process.env.REACT_APP_API_HOST + '/enrollprograms/' + program_id;
@@ -101,7 +159,7 @@ class ProgramPage extends React.Component {
                 "Authorization": `${Cookies.get('token')}`
             }
         }).then(res => {
-            console.log(res);
+            console.log(res)
             this.setState({
                 id: program_id,
                 name: res.data.data.program_id.name,
@@ -113,19 +171,19 @@ class ProgramPage extends React.Component {
                 var courseId = res.data.data.program_id.list_course[i].course_id;
                 listOfCourseId.push(courseId);
                 var prerequisite = res.data.data.program_id.list_course[i].prerequisite;
-                var listOfPrerequisite = [];
-                for (var j = 0; j < prerequisite.length; j++) {
-                    listOfPrerequisite.push(prerequisite[j]);
-                }
-                var status = null;
+                this.state.listOfPrerequisite.push(prerequisite);
                 if (this.state.permission === 0) {
-                    status = res.data.data.courses[i].status_course;
-                }
-                for (var j = 0; j < prerequisite.length; j++) {
-                    listOfPrerequisite.push(prerequisite[j]);
+                    this.state.listStatus.push(res.data.data.courses[i].status_course);
                 }
             }
-            this.parseCourses(listOfCourseId, listOfPrerequisite, status)
+            this.setState({
+                listOfPrerequisite: this.state.listOfPrerequisite
+            })
+            this.setState({
+                listStatus: this.state.listStatus
+            })
+            this.parsePrerequisite(this.state.listOfPrerequisite);
+            this.parseCourses(listOfCourseId);
         })
     }
 
@@ -136,14 +194,25 @@ class ProgramPage extends React.Component {
                     <h1>{this.state.name}</h1>
                 </div>
 
+                {
+                    this.state.permission !== 0 &&
+                    <div className="edit-prerequisite">
+                        <Button variant="primary" onClick={this.showEditPrerequisite}>Edit Prerequisite</Button>
+                        {
+                            this.state.isEditPrerequisite &&
+                            <EditPrerequisite show={this.state.isEditPrerequisite} onHide={this.hideEditPrerequisite} id={this.state.id}/>
+                        }
+                    </div>
+                }
+
                 <div className="program-page-desc-teacher-list">
                     <div className="course-list">
                         {
-                            Array.from(this.state.listOfCourse).map(item => (
+                            Array.from(this.state.listOfCourse).map((item, i) => (
                                 <CourseLink name={item.name} 
                                             courseId={item.id} 
-                                            prerequisite={item.prerequisite}
-                                            status={item.status}
+                                            prerequisite={this.state.listOfPrerequisiteName[i]}
+                                            status={this.state.listStatus[i]}
                                             permission={this.state.permission}
                                             programId={this.state.id}
                                 />
