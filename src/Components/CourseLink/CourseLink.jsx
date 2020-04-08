@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import Axios from 'axios';
+import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import './CourseLink.css'
@@ -8,20 +8,22 @@ import './CourseLink.css'
 const CourseLink = (props) => {
     const programId = props.programId;
     const courseId = props.courseId;
-    const [isShowDescription, setIsShowDescription] = useState(false)
-    const [description, setDescription] = useState('description')
+    const [isShowDescription, setIsShowDescription] = useState(false);
+    const [description, setDescription] = useState('description');
+    const [code, setCode] = useState('code');
 
     const showDescription = () => {
         setIsShowDescription(!isShowDescription)
         const api = process.env.REACT_APP_API_HOST + '/courses/' + courseId;
-        Axios.get(api).then(res => {
+        axios.get(api).then(res => {
             setDescription(res.data.data.description);
+            setCode(res.data.data.code);
         })
     }
 
     const enrollCourse = () => {
         const api = process.env.REACT_APP_API_HOST + '/enrollprograms/enroll/' + programId;
-        Axios.patch(api, {
+        axios.patch(api, {
             "course_id": courseId
         }, {
             headers: {
@@ -49,9 +51,17 @@ const CourseLink = (props) => {
                 isShowDescription &&
                 <div>
                     <p><b>Description :</b> {description}</p>
+                    <p><b>Code :</b> {code}</p>
                     {
                         props.prerequisite.length > 0 &&
-                        <p>Prerequisite : {props.prerequisite}</p>
+                    <p>Prerequisite :</p>
+                    }
+                    { props.prerequisite.length > 0 &&
+                    props.prerequisite.map((prereq) => {
+                            return (<tr>
+                                <td>{prereq}</td>
+                            </tr>
+                    )})
                     }
                     {
                         props.prerequisite.length === 0 &&

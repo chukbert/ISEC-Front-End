@@ -94,7 +94,6 @@ class CoursePage extends React.Component {
                     "Authorization": `${Cookies.get('token')}`
                 }
             }).then(res => {
-                console.log(res);
                 var id = res.data.data._id;
                 var name = res.data.data.name;
                 this.state.listOfTopic.push({"id": id, "name": name});
@@ -106,26 +105,9 @@ class CoursePage extends React.Component {
     }
 
     componentDidMount() {
-        // this.clearArray();
-
-        // const api = process.env.REACT_APP_API_HOST + '/topics'
-        // axios.get(api).then(res => {
-        //     for (var i = 0; i < res.data.data.length; i++) {
-        //         var topicId = res.data.data[i]._id;
-        //         var topicName = res.data.data[i].name;
-
-        //         this.state.listOfTopic.push({"id": topicId, "name": topicName});
-
-        //         this.state.listOfTopic.push()
-        //         this.setState({
-        //             listOfTopic: this.state.listOfTopic,
-        //         })
-        //     }
-        // })
         this.checkToken();
         const programId = this.props.match.params.program_id;
         const courseId = this.props.match.params.course_id;
-        console.log(courseId);
         var api;
         if (this.props.permission === 0) {
             api = process.env.REACT_APP_API_HOST + '/enrollprograms/' + programId 
@@ -135,7 +117,6 @@ class CoursePage extends React.Component {
                     "Authorization": `${Cookies.get('token')}`
                 }
             }).then(res => {
-                console.log(res)
                 var topicList = []
                 for (var i = 0; i < res.data.data.topics.length; i++) {
                     var topicId = res.data.data.topics[i].topic_id._id;
@@ -158,20 +139,12 @@ class CoursePage extends React.Component {
                     "Authorization": `${Cookies.get('token')}`
                 }
             }).then(res => {
-                console.log(res)
                 var topicIdList = []
                 for (var i = 0; i < res.data.data.list_topic.length; i++) {
                     var topicId = res.data.data.list_topic[i]._id;
                     topicIdList.push(topicId);
                 }
-                console.log(topicIdList);
                 this.parseTopics(topicIdList);
-                // for (var i = 0; i < res.data.data.list_topic.length; i++) {
-                //     var topicId = res.data.data.list_topic[i].topic_id._id;
-                //     var topicName = res.data.data.list_topic[i].topic_id.name;
-                //     var topicStatus = res.data.data.list_topic[i].status_topic;
-                //     topicList.push({"id": topicId, "name": topicName, "status": topicStatus})
-                // }
                 this.setState({
                     id: res.data.data._id,
                     name: res.data.data.name,

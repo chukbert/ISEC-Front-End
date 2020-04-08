@@ -18,7 +18,6 @@ function AddTopic(props) {
                 "Authorization": `${Cookies.get('token')}`
             }
         }).then(function() {
-            // console.log("SUCC");
             window.location.reload();
         })
     }

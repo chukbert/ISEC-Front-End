@@ -59,7 +59,6 @@ class ListEnrolledProgram extends React.Component {
                     "Authorization": `${Cookies.get('token')}`
                 }
             }).then(res => {
-                console.log(res);
                 var programId = res.data.data.program_id._id;
                 var name = res.data.data.program_id.name;
                 var description = res.data.data.program_id.description;
