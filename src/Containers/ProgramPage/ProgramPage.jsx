@@ -117,7 +117,7 @@ class ProgramPage extends React.Component {
                 for (var j = 0; j < prereq[i].length; j++) {
                     var listName = []
                     for (var k = 0; k < this.state.listOfCourseName.length; k++) {
-                        if (prereq[i][j] == this.state.listOfCourseName[k].id) {
+                        if (prereq[i][j] === this.state.listOfCourseName[k].id) {
                             listName.push(this.state.listOfCourseName[k].name)
                         }
                     }
@@ -160,6 +160,8 @@ class ProgramPage extends React.Component {
             }
         }).then(res => {
             console.log(res)
+            console.log(res.data.data.courses)
+            console.log(res.data.data.program_id.list_course)
             this.setState({
                 id: program_id,
                 name: res.data.data.program_id.name,
@@ -173,7 +175,11 @@ class ProgramPage extends React.Component {
                 var prerequisite = res.data.data.program_id.list_course[i].prerequisite;
                 this.state.listOfPrerequisite.push(prerequisite);
                 if (this.state.permission === 0) {
-                    this.state.listStatus.push(res.data.data.courses[i].status_course);
+                    for (var j = 0; j < res.data.data.courses.length; j++) {
+                        if (res.data.data.courses[j].course_id._id === res.data.data.program_id.list_course[i].course_id) {
+                            this.state.listStatus.push(res.data.data.courses[j].status_course);
+                        }
+                    }
                 }
             }
             this.setState({
@@ -225,7 +231,7 @@ class ProgramPage extends React.Component {
                     </div>
                 </div>
 
-                {(this.state.permission === 1 || this.state.permission === 2) &&
+                {this.state.permission !== 0 &&
                 <div className="add-course-button">
                     <Button variant="primary" onClick={this.showAddCourse}>Add Course</Button>
                     {

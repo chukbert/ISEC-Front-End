@@ -149,7 +149,6 @@ class CoursePage extends React.Component {
                     id: res.data.data._id,
                     name: res.data.data.name,
                     description: res.data.data.description,
-                    // listOfTopic: topicList
                 });
             })
         } 
@@ -172,8 +171,14 @@ class CoursePage extends React.Component {
                         }
                     </div>
                 }
+                {
+                    this.state.permission !== 0 &&
+                    <div className="view-grades">
+                        <Button variant="primary">View Grades</Button>
+                    </div>
+                }
                 
-                <div className="course-page-desc-teacher-list">
+                <div className="topics">
                     <div className="topic-list">
                         {
                             Array.from(this.state.listOfTopic).map(item => (
@@ -181,7 +186,7 @@ class CoursePage extends React.Component {
                             ))
                         }
                     </div>
-                    <div className="desc-teacher">
+                    <div className="desc-course">
                         <Description data={this.state.description} />
                     </div>
                 </div>
