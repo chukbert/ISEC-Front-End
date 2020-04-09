@@ -3,7 +3,13 @@
 }
 
 .edit-course {
-    margin-left: 10em;
+    margin-left: 38em;
+    display: inline;
+}
+
+.view-grades {
+    margin-left: 2em;
+    display: inline;
 }
 
 .add-topic-button {
@@ -19,15 +25,16 @@
     margin-top: 0.5em;
 }
 
-.course-page-desc-teacher-list {
+.topics {
     display: flex;
     width: fit-content;
     margin: auto;
 }
 
-.desc-teacher {
+.desc-course {
     display: block;
     margin-left: 5em;
+    margin-top: 2em;
 }
 
 .desc-teacher .description {
